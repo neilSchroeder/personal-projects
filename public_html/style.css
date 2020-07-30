@@ -1,0 +1,207 @@
+/* QUESTION:  *//*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+                 */
+
+/* reset page formatting ... DO NOT TOUCH */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+/******************************** end of page format reset *************************/
+
+/***********************************************************************************/
+/* LINKS/DIRS formatting */
+p.location_statement {
+    padding: 14px 16px;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    overflow: hidden;
+    background-color: #333;
+    width: 100%;
+}
+li {
+    display: inline-block;
+    border-right: 1px solid #bbb;
+    float: left;
+}
+li.page_title{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-style: italic;
+    font-weight: 3;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li.last-child{
+    border-right: 1px solid #bbb;
+}
+li a:hover {
+    background-color: #111;
+}
+.active {
+    background-color: #4CAF50;
+}
+
+body.homepage {
+    background-image: url("https://hepwww.pp.rl.ac.uk/groups/CMSvpt/bestphotos/PPARC%20photos%20selection%20Dec%202006/CMS%20Point%205%20Surface/CernCMS_137.jpg");
+    background-color: black;
+    background-size: 100%; 
+    background-attachment: fixed;
+}
+
+/****************************************************************************/
+/* image settings */
+.row {
+    display: flex; 
+    flex-wrap: wrap;
+    border-collapse: collapse;
+    width: 100%; 
+}
+
+div.polaroid {
+    flex: 1 1 160px;
+    max-width: 31%;
+    background-color: white; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.polaroid:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+div.polaroid img {
+    max-width: 95%;
+    align: center;
+    height: auto;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+div.polaroid div.caption {
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.caption p{
+    font-size: 15px;
+    margin-left:auto;
+    margin-right:auto;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
