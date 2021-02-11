@@ -98,21 +98,24 @@ def errors(result,min_chi):
     return ret
             
 
-def fit(x,y,guess_cb):
+def fit(x,y):
     global thisBW
     global thisCB
     global _DATA_
     
     #make bw distribution
-    thisBW = breitWigner.bw(x)
-    thisCB = crystalBall.cb(x, guess_cb)
     _DATA_ = y
-    guess = guess_cb
+    mean = np.average(x,weights=y)-91.188
+    width = np.sqrt(np.average(np.multiply(x-np.average(x,weights=y),x-np.average(x,weights=y)), weights=y))
+    guess = [1.424,1.86,mean,width]
 
     bounds = [(0.01,100), (0.01,100), (-5,5), (0.1,10)]
 
+    thisBW = breitWigner.bw(x)
+    thisCB = crystalBall.cb(x, guess)
     guess = scan(guess)
     
+
     print(guess)
     result = minimize(target, 
             np.array(guess), 

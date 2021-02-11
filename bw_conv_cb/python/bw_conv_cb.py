@@ -9,9 +9,7 @@ def main():
     x_vals = [x[0] for x in data]
     y_vals = [x[1] for x in data] 
 
-    
-
-    fit.fit(x_vals,y_vals, [1.424, 1.86, np.average(x_vals, weights=y_vals)-91.188, 1.])
+    fit.fit(x_vals,y_vals)
 
 
 main()
