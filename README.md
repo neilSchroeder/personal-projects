@@ -6,6 +6,7 @@ Code for some tools developed which working with CMS
     1) A framework used for cross-checking the scales and smearings from ECALELF (https://github.com/ECALELFS/ECALELF)
     2) A c++ script used for plotting the likelihood scans for the Higgs mass (as seen in HIG-19-004)
     3) A c++ script used for plotting the mass summary plots for the Higgs mass (as seen in HIG-19-004)
+    4) A python package for fitting a Breit-Wigner convoluted with a Crystal-Ball to data.
 
 ## Installation
 
