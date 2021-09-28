@@ -35,11 +35,11 @@ class cb:
         mask_geq = (self.x-self.mean)/self.width > -1*self.alpha
         self.y = np.array([geq[i] if mask_geq[i] else leq[i] for i in range(len(mask_geq))])
         self.y = self.y/np.sum(self.y)
-        return self.y
 
     def update(self, pars):
         self.alpha = pars[0]
         self.n = pars[1]
         self.mean = pars[2]
         self.width = pars[3]
+        self.getY()
 
