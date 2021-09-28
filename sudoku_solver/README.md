@@ -44,3 +44,82 @@ The program will handle all of the errors provided in the prompt. Namely, the pr
 - there are no solutions
 
 ## Usage
+
+just clone the repository, make sure you're using python 3.8.10 and that you have the `time` package, then from a command line just run
+`./test_sudoku`
+and enjoy the magic. Feel free to dink around and change the input sudoku to try to break it. If you manage to do so, let me know and I'll try to fix it.
+
+## Performance
+
+I'm running this on a System76 Gazelle. Running `lscpu` returns the following:
+```
+Architecture:                    x86_64
+CPU op-mode(s):                  32-bit, 64-bit
+CPU(s):                          12
+Thread(s) per core:              2
+Core(s) per socket:              6
+Socket(s):                       1
+NUMA node(s):                    1
+Vendor ID:                       GenuineIntel
+CPU family:                      6
+Model:                           165
+Model name:                      Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz
+Stepping:                        2
+CPU MHz:                         2600.000
+CPU max MHz:                     5000.0000
+CPU min MHz:                     800.0000
+```
+
+When running the tests I get the following output:
+
+```
+the initial state was:
+[1, 0, 9, 0, 4, 0, 0, 8, 0]
+[0, 5, 2, 0, 0, 0, 0, 1, 0]
+[0, 3, 4, 0, 2, 0, 5, 0, 7]
+[0, 0, 8, 0, 0, 9, 0, 0, 0]
+[9, 0, 0, 7, 1, 0, 4, 0, 0]
+[0, 0, 0, 4, 0, 0, 7, 0, 0]
+[0, 0, 6, 0, 0, 5, 0, 0, 0]
+[0, 0, 7, 0, 8, 6, 0, 0, 3]
+[0, 0, 0, 1, 0, 0, 2, 0, 0]
+
+the solution was found in 0.0078 seconds
+the solution is:
+[1, 7, 9, 5, 4, 3, 6, 8, 2]
+[8, 5, 2, 9, 6, 7, 3, 1, 4]
+[6, 3, 4, 8, 2, 1, 5, 9, 7]
+[7, 4, 8, 6, 3, 9, 1, 2, 5]
+[9, 6, 5, 7, 1, 2, 4, 3, 8]
+[3, 2, 1, 4, 5, 8, 7, 6, 9]
+[2, 9, 6, 3, 7, 5, 8, 4, 1]
+[4, 1, 7, 2, 8, 6, 9, 5, 3]
+[5, 8, 3, 1, 9, 4, 2, 7, 6]
+
+
+found multiple solutions at a backtrack depth of 14
+an exception was encountered after 0.0146 seconds
+
+the initial state was:
+[1, 5, 7, 8, 3, 2, 4, 9, 6]
+[0, 0, 4, 1, 0, 0, 0, 5, 0]
+[3, 0, 0, 0, 0, 5, 0, 0, 0]
+[0, 0, 0, 0, 7, 8, 9, 0, 0]
+[0, 0, 0, 0, 0, 0, 1, 0, 0]
+[0, 0, 0, 0, 6, 0, 3, 0, 4]
+[6, 0, 2, 0, 0, 4, 0, 0, 0]
+[0, 0, 1, 0, 0, 7, 0, 0, 0]
+[5, 0, 0, 0, 0, 0, 8, 0, 0]
+
+the solution was found in 0.0059 seconds
+the solution is:
+[1, 5, 7, 8, 3, 2, 4, 9, 6]
+[2, 8, 4, 1, 9, 6, 7, 5, 3]
+[3, 9, 6, 7, 4, 5, 2, 1, 8]
+[4, 1, 5, 3, 7, 8, 9, 6, 2]
+[7, 6, 3, 4, 2, 9, 1, 8, 5]
+[9, 2, 8, 5, 6, 1, 3, 7, 4]
+[6, 7, 2, 9, 8, 4, 5, 3, 1]
+[8, 3, 1, 2, 5, 7, 6, 4, 9]
+[5, 4, 9, 6, 1, 3, 8, 2, 7]
+```

@@ -17,11 +17,11 @@ def solve(problem):
         soln = sudoku.sudoku_solver(problem)
         end = time.time()
         print_board("the initial state was:",problem)
-        print("the solution was found in", round(end-start,3), "seconds")
+        print("the solution was found in", round(end-start,4), "seconds")
         print_board("the solution is:", soln)
     except:
         end = time.time()
-        print("an exception was encountered after", round(end-start,3), "seconds")
+        print("an exception was encountered after", round(end-start,4), "seconds")
 
 def main():
     problem_multiple = [[0, 0, 0, 1, 0, 0, 0, 0, 8],
