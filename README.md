@@ -1,17 +1,17 @@
-# tools-dev: developement of tools and scripts
+# Tools
 
-Code for some tools developed which working with CMS
+This is a repository of both person and work-related projects I've put together over the years.
 
-    This Documentation contains the following:
-     A framework used for validating the scales and smearings from ss_pymin (https://gitlab.cern.ch/nschroed/cms-ecal-scales-and-smearings)
+    validation_tools:
+        A suite of c++ and ROOT scripts which are used for validating the CMS ECAL scales and smearings
     
-    3) A c++ script used for plotting the mass summary plots for the Higgs mass (as seen in HIG-19-004)
-    4) A python package for fitting a Breit-Wigner convoluted with a Crystal-Ball to data.
+    sudoku_solver:
+        A python package for quickly solving sudoku puzzles using backtracking.
+    
+    bw_conv_cb:
+        A python package for fitting a Breit-Wigner distribution convoluted with a Crystal Ball distribution. 
 
-## Installation
+    public_html:
+        A php/css package for setting up a public webpage which displays plots from a linux file system (https://homepages.spa.umn.edu/~schr1077/)
 
-There is no additional software (aside from boost_programOptions) needed for this install
 
-    git clone https://github.com/neilSchroeder/tools.git myTools
-    cd myTools
-    make 
