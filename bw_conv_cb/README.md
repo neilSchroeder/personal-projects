@@ -9,6 +9,8 @@ To use this package, you can just run
 `python3 python/bw_conv_cb.py`  
 to see the program run on the test data.
 
+<img src='fit.png' height="500" width="500">
+
 To integrate into other places just add fit.py to your program, maybe remove the plotting/error determination for some increased speed.
 Should be pretty simple.  
 If you have questions feel free to ask.
