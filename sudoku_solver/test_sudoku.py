@@ -55,9 +55,22 @@ def main():
                              [0, 0, 1, 0, 0, 7, 0, 0, 0],
                              [5, 0, 0, 0, 0, 0, 8, 0, 0]]
 
+    #just for the heck of it here's a supposedly very hard sudoku problem developed by a Finnish professor (Arto Inkala) in 2006
+    #https://punemirror.indiatimes.com/pune/cover-story/mirror-report-on-illegal-laying-of-cables-raises-heat-in-pmc-meet/articleshow/32299745.cms
+    al_escargo = [[ 0, 0, 5, 3, 0, 0, 0, 0, 0],
+                  [ 8, 0, 0, 0, 0, 0, 0, 2, 0],
+                  [ 0, 7, 0, 0, 1, 0, 5, 0, 0],
+                  [ 4, 0, 0, 0, 0, 5, 3, 0, 0],
+                  [ 0, 1, 0, 0, 7, 0, 0, 0, 6],
+                  [ 0, 0, 3, 2, 0, 0, 0, 8, 0],
+                  [ 0, 6, 0, 5, 0, 0, 0, 0, 9], 
+                  [ 0, 0, 4, 0, 0, 0, 0, 3, 0],
+                  [ 0, 0, 0, 0, 0, 9, 7, 0, 0]]
+
     solve(problem_hard)
     solve(problem_multiple)
     solve(problem_multiple_hard)
+    solve(al_escargo)
 
 if __name__ == '__main__':
     main()
