@@ -28,10 +28,10 @@ Written by [f.rodrigues](https://www.codewars.com/users/f.rodrigues)
 
 The method I've chosen to use is a recursive backtracking algorithm. The outline of the algorithm is as follows:
 
-1 Fill as many singletons (cells with only one possible occupant) as possible 
-2 When no more singletons exist, find the cell with the fewest possible occupants (2 or more)
-3 Create new boards for all possible occupants of the minimum occupation cell
-4 Attempt to solve each board from 1 
+1 Fill as many singletons (cells with only one possible occupant) as possible   
+2 When no more singletons exist, find the cell with the fewest possible occupants (2 or more)  
+3 Create new boards for all possible occupants of the minimum occupation cell  
+4 Attempt to solve each board from 1   
 
 Eventually a solution is found, assuming a solution exists. 
 
