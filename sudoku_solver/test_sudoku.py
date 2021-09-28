@@ -21,6 +21,7 @@ def solve(problem):
         print_board("the solution is:", soln)
     except:
         end = time.time()
+        print_board("the initial state was:", problem)
         print("an exception was encountered after", round(end-start,4), "seconds")
 
 def main():
