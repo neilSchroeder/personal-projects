@@ -1,6 +1,6 @@
 # Sudoku Solver
 
-This is a sudoku solver. I wrote this mostly because I stubled upon a prompt for a sudoku solver on codewars (https://www.codewars.com/kata/55171d87236c880cea0004c6/train/python) and didn't think I could solve it. Turns out that I just needed to debug it a bit and then it worked. However, right after that I came across a harder version of this prompt (https://www.codewars.com/kata/5588bd9f28dbb06f43000085/train/python), and to my delight I had some functioning code from which to start optimizing. The code you'll find here is the solution to this second, harder prompt, after having been refactored and cleaned up.
+This is a sudoku solver. I wrote this mostly because I stubled upon a prompt for a [sudoku solver on codewars](https://www.codewars.com/kata/55171d87236c880cea0004c6/train/python) and didn't think I could solve it. Turns out that I just needed to debug it a bit and then it worked. However, right after that I came across a harder version of this [prompt](https://www.codewars.com/kata/5588bd9f28dbb06f43000085/train/python), and to my delight I had some functioning code from which to start optimizing. The code you'll find here is the solution to this second, harder prompt, after having been refactored and cleaned up.
 
 ## The Prompt
 
@@ -19,7 +19,7 @@ Write a function that solves sudoku puzzles of any difficulty. The function will
 
 Or it should raise an error in cases of: invalid grid (not 9x9, cell with values not in the range 1~9); multiple solutions for the same puzzle or the puzzle is unsolvable
 
-Python users: python 2 has been disabled." 
+Python users: python 2 has been disabled."
 
 https://www.codewars.com/kata/5588bd9f28dbb06f43000085/train/python
 Written by [f.rodrigues](https://www.codewars.com/users/f.rodrigues)
@@ -33,7 +33,7 @@ The method I've chosen to use is a recursive backtracking algorithm. The outline
 3 Create new boards for all possible occupants of the minimum occupation cell  
 4 Attempt to solve each board from 1   
 
-Eventually a solution is found, assuming a solution exists. 
+Eventually a solution is found, assuming a solution exists.
 
 ## Error Handling
 
