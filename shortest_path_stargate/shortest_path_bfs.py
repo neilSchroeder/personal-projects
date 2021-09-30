@@ -8,26 +8,40 @@ class node:
         self.is_start = is_start
         self.neighbors = {}
         self.is_active = False
-        self.distance_from_start_node = None
+        self.distance_from_start_node = 99999
         self.min_distance_to_start = 99999
+        self.path = []
 
     def activate(self):
         self.is_active = True
         self.neighbors = self.get_neighboring_nodes()
 
-    def set_distance_from_start(self):
+    def set_distance_from_start(self, active_nodes):
 
+        min_key = ()
+        for key in self.neighbors.keys():
+            if key not in active_nodes.keys():
+                continue
+            if self.neighbors[key].is_start:
+                self.distance_from_start_node = self.distance_to_node(n)
+                self.path.append(key)
+                return
+            if self.distance_to_node(self.neighbors[key]) + self.neighbors[key].distance_from_start_node < self.distance_from_start_node:
+                self.distance_from_start_node = self.distance_to_node(self.neighbors[key]) + self.neighbors[key].distance_from_start_node
+                min_key = key
+
+        self.path.append(min_key)
 
     def get_neighboring_nodes(self):
         max_row = len(self.map)
         max_col = len(self.map[0])
         possible_neighbors = [(i,j) for i in range(self.loc[0]-1 if self.loc[0]-1 > 0 else 0 , self.loc[0]+2 if self.loc[0]+2 < max_row else max_row) for j in range(self.loc[1]-1 if self.loc[1]-1 > 0 else 0, self.loc[2]+2 if self.loc[2]+2 < max_col else max_col)]
-        for node in possible_neighbors:
-            if self.map[node[0]][node[1]] != 'X' and node is not self.loc:
-                self.neighbors[node] = self.distance_to_node(node)
+        for n in possible_neighbors:
+            if self.map[n[0]][n[1]] != 'X' and n is not self.loc:
+                self.neighbors[n] = self.distance_to_node(n)
 
-    def distance_to_node(self, node):
-        return (abs(self.loc[0]-node[0])**2 + abs(self.loc[1]-node[1])**2)**0.5
+    def distance_to_node(self, n):
+        return (abs(self.loc[0]-n[0])**2 + abs(self.loc[1]-n[1])**2)**0.5
 
 
 
@@ -68,21 +82,15 @@ class graph:
         start_node.activate()
         queue = start_node.neighbors
 
-        while self.count_inactive_nodes() != 0 and len(queue) > 0:
+        while len(queue) > 0:
             #activate the nodes in the queue
-            node = queue.pop(0)
-            if not node.is_active:
-                node.activate()
-                self[node.loc] = node
+            n = queue.pop(0)
+            if not n.is_active:
+                print(n.loc)
+                n.activate()
+                if self.goal_node_coords not in self.active_nodes.keys():
+                    queue = queue + node.neighbors()
                 node.set_distance_from_start(self.active_nodes)
-                queue = queue + node.neighbors()
-
-
-
-class node:
-
-    __init__(self, location, distance_map):
-
 
 def wire_DHD_SG1(map):
 
@@ -92,3 +100,7 @@ def wire_DHD_SG1(map):
 
     my_graph = graph(map_list)
     my_graph.search_for_goal()
+    if my_graph.goal_node_coords in my_graph.active_nodes.keys():
+        my_graph.draw_path(my_graph.active_nodes[my_graph.goal_node_coords].path)
+        return '\n'.join([''.join(row) for row in my_graph.map])
+    return "Oh for crying out loud..."
