@@ -5,13 +5,21 @@ import time
 
 def print_board(message, board):
     print(message)
-    for row in board:
-        print(row)
+    print(25*"-")
+    for r,row in enumerate(board):
+        row_string = "| "
+        for i,val in enumerate(row):
+            row_string = row_string + str(val)+" " if i not in [2, 5, 8] else row_string + str(val)+ " | "
+        print(row_string)
+        if r in [2,5]:
+            print(25*"-")
+    print(25*"-")
+
     print()
 
 def solve(problem):
 
-    
+
     start = time.time()
     try:
         soln = sudoku.sudoku_solver(problem)
@@ -63,7 +71,7 @@ def main():
                   [ 4, 0, 0, 0, 0, 5, 3, 0, 0],
                   [ 0, 1, 0, 0, 7, 0, 0, 0, 6],
                   [ 0, 0, 3, 2, 0, 0, 0, 8, 0],
-                  [ 0, 6, 0, 5, 0, 0, 0, 0, 9], 
+                  [ 0, 6, 0, 5, 0, 0, 0, 0, 9],
                   [ 0, 0, 4, 0, 0, 0, 0, 3, 0],
                   [ 0, 0, 0, 0, 0, 9, 7, 0, 0]]
 
