@@ -59,7 +59,7 @@ class graph:
                 if not self.nodes[self.goal_node_coords].is_active:
                     queue = queue + [key for key in n.neighbors.keys() if not self.nodes[key].is_active]
                     queue_indices = {x: queue.index(x) for x in queue}
-                    queue.sort(key=lambda x: 0.3*queue_indices[x] + 3*n.indegree + 0.32*self.distance_to_goal(x))
+                    queue.sort(key=lambda x: 0.35*queue_indices[x] + 3*n.indegree + 0.32*self.distance_to_goal(x))
                 n.activate()
 
             self.draw_path(queue, reset=True, symb='Q')
@@ -69,7 +69,6 @@ class graph:
         if not self.nodes[self.goal_node_coords].is_active:
             return False
 
-        self.draw_path(list(self.active_nodes.keys()),reset=True,symb="A")
         return True
 
     def get_path_length(self,path):
@@ -102,9 +101,6 @@ class graph:
 
             if key == self.goal_node_coords:
                 continue
-
-            #if self.watch_evolution:
-                #self.draw_path(self.active_nodes[key].path, reset=True, symb="?")
 
         self.active_nodes[self.goal_node_coords].set_distance_from_start(self.active_nodes)
         self.draw_path(self.nodes[self.goal_node_coords].path)

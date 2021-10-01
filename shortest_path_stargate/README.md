@@ -12,6 +12,12 @@ cd shortest_path_stargate
 python3 test_shortest_path.py
 ```
 
+# Example
+
+<video width="500" height="300" controls>
+  <source src="example/Kazam_screencast_00000.mp4" type="video/mp4">
+</video>
+
 # To Do
 
-Tune sorting hyperparameters [here]()
+Tune sorting hyperparameters [here](https://github.com/neilSchroeder/tools/blob/4ff8fbcd37695959baed98c1716c08108d18e7d6/shortest_path_stargate/graph_bfs_class.py#L62)
