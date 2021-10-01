@@ -59,8 +59,11 @@ class graph:
                 if not self.nodes[self.goal_node_coords].is_active:
                     queue = queue + [key for key in n.neighbors.keys() if not self.nodes[key].is_active]
                     queue_indices = {x: queue.index(x) for x in queue}
-                    queue.sort(key=lambda x: 0.5*queue_indices[x] + 2*n.indegree + 0.5*self.distance_to_goal(x))
+                    queue.sort(key=lambda x: 0.3*queue_indices[x] + 3*n.indegree + 0.32*self.distance_to_goal(x))
                 n.activate()
+
+            self.draw_path(queue, reset=True, symb='Q')
+            time.sleep(0.005)
 
 
         if not self.nodes[self.goal_node_coords].is_active:
@@ -87,15 +90,15 @@ class graph:
                 queue = queue + neighbors
                 for neighbor in neighbors:
                     if neighbor in parent_path_length.keys():
-                        parent_length = self.nodes[key].distance_to_start
+                        parent_length = self.nodes[key].distance_from_start_node
                         if parent_length < parent_path_length[neighbor]:
                             parent_path_length[neighbor] = parent_length
                     else:
-                        parent_path_length[neighbor] = self.nodes[key].distance_to_start
+                        parent_path_length[neighbor] = self.nodes[key].distance_from_start_node
 
             queue = sorted(sorted(queue, key = lambda x : self.active_nodes[x].indegree), key = lambda x : parent_path_length[x])
-            self.draw_path([key], reset=True, symb='Q')1
-            time.sleep(0.02)
+            self.draw_path(queue, reset=True, symb='Q')
+            time.sleep(0.005)
 
             if key == self.goal_node_coords:
                 continue

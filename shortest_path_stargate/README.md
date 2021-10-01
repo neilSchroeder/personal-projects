@@ -14,7 +14,4 @@ python3 test_shortest_path.py
 
 # To Do
 
-Make a better sorting algorithm. Here are some ideas:
-
-  Sort all entries by their order, i.e. minimum number of edges between a node n
-  and the starting node.
+Tune sorting hyperparameters [here]()
