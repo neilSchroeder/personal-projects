@@ -75,27 +75,36 @@ class graph:
     def find_shortest_path(self):
 
         queue = [self.start_node_coords]
+        parent_path_length = {}
 
         while queue:
 
             key = queue.pop(0)
-            neighbors = [ x for x in self.nodes[key].neighbors if self.nodes[x].is_active and self.nodes[x].indegree > self.nodes[key].indegree]
-            queue = queue + neighbors
-            queue_index = {x: i for i,x in enumerate(queue)}
-            queue.sort(key = lambda x : queue_index[x] + self.active_nodes[x].indegree)
-            print(len(queue))
+            self.active_nodes[key].set_distance_from_start(self.active_nodes)
+
+            if not queue.count(self.goal_node_coords):
+                neighbors = [ x for x in self.nodes[key].neighbors if self.nodes[x].is_active and self.nodes[x].indegree > self.nodes[key].indegree and queue.count(x) < 2]
+                queue = queue + neighbors
+                for neighbor in neighbors:
+                    if neighbor in parent_path_length.keys():
+                        parent_length = self.nodes[key].distance_to_start
+                        if parent_length < parent_path_length[neighbor]:
+                            parent_path_length[neighbor] = parent_length
+                    else:
+                        parent_path_length[neighbor] = self.nodes[key].distance_to_start
+
+            queue = sorted(sorted(queue, key = lambda x : self.active_nodes[x].indegree), key = lambda x : parent_path_length[x])
+            self.draw_path([key], reset=True, symb='Q')1
+            time.sleep(0.02)
 
             if key == self.goal_node_coords:
                 continue
 
-            self.active_nodes[key].set_distance_from_start(self.active_nodes)
             #if self.watch_evolution:
                 #self.draw_path(self.active_nodes[key].path, reset=True, symb="?")
 
         self.active_nodes[self.goal_node_coords].set_distance_from_start(self.active_nodes)
         self.draw_path(self.nodes[self.goal_node_coords].path)
-
-
 
     def draw_path(self, path,reset=False, symb="P"):
         self.map[self.start_node_coords[0]][self.start_node_coords[1]] = "\033[93mS\033[0m"
