@@ -1,6 +1,14 @@
 # Sudoku Solver
 
-This is a sudoku solver. I wrote this mostly because I stubled upon a prompt for a [sudoku solver on codewars](https://www.codewars.com/kata/55171d87236c880cea0004c6/train/python) and didn't think I could solve it. Turns out that I just needed to debug it a bit and then it worked. However, right after that I came across a harder version of this [prompt](https://www.codewars.com/kata/5588bd9f28dbb06f43000085/train/python), and to my delight I had some functioning code from which to start optimizing. The code you'll find here is the solution to this second, harder prompt, after having been refactored and cleaned up.
+This is a python based depth first sudoku solver which serves as a refactored solution to this codewars [prompt](https://www.codewars.com/kata/5588bd9f28dbb06f43000085/train/python).
+
+## Installation and Usage
+
+```
+git clone git@github.com:neilSchroeder/tools.git
+cd sudoku_solver
+python3 test_sudoku.py
+```
 
 ## The Prompt
 
@@ -42,12 +50,6 @@ The program will handle all of the errors provided in the prompt. Namely, the pr
 - the grid is invalid
 - there are multiple solutions
 - there are no solutions
-
-## Usage
-
-just clone the repository, make sure you're using python 3.8.10 and that you have the `time` package, then from a command line just run
-`./test_sudoku`
-and enjoy the magic. Feel free to dink around and change the input sudoku to try to break it. If you manage to do so, let me know and I'll try to fix it.
 
 ## Performance
 
