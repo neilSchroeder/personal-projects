@@ -14,7 +14,7 @@ python3 test_shortest_path.py
 
 # Example
 
-![video](https://github.com/neilSchroeder/tools/shortest_path_stargate/example/bfs_example.mp4)
+![video](example/bfs_example.gif)
 
 # To Do
 
