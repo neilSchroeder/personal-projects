@@ -12,7 +12,7 @@ def main():
     for map_i in range(number_of_maps):
         rand_map = ""
         for i in range(map_height):
-            rand_X = [random.randint(0,2) for i in range(map_width)]
+            rand_X = [random.randint(0,1) for i in range(map_width)]
             row = "".join(["." if rand_X[i] else "X" for i in range(map_width)])
             rand_map = rand_map + row
             if i < map_height-1:
@@ -31,6 +31,7 @@ def main():
         end = time.time()
         print("the shortest path is:")
         print(soln)
+        print("solution was found in", round(end-start,4), "seconds")
         print()
         #print("it took", round(end-start,4), "seconds to find the solution")
         #print()
