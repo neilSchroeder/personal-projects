@@ -7,7 +7,7 @@ def main():
 
 
     map_height = 40
-    map_width = 120
+    map_width = 150
     number_of_maps = 10
     for map_i in range(number_of_maps):
         rand_map = ""
