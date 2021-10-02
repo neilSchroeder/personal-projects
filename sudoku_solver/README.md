@@ -12,7 +12,7 @@ python3 test_sudoku.py
 
 ## Example
 
-A gif of the solution to al escargot:
+A gif of the solution to al escargot:  
 ![video](example/al_escargot.gif)
 
 ## Methodology
