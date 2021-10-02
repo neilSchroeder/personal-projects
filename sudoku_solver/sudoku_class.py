@@ -1,7 +1,7 @@
-
+import time
 class sudoku:
 
-    def __init__(self,board):
+    def __init__(self,board, watch_progression=False):
         self.block_coords = {}
         self.check_for_duplicates = True
         self.get_blocks()
@@ -12,6 +12,7 @@ class sudoku:
         self.initialize_possibilities()
         self.branch = []
         self.min_depth = 3
+        self.watch = watch_progression
 
 
     def get_blocks(self):
@@ -111,6 +112,19 @@ class sudoku:
         self.board[coord[0]][coord[1]] = self.possibilities[coord][0]
         return coord
 
+    def draw_board(self):
+        print(25*"-")
+        for r,row in enumerate(self.board):
+            row_string = "| "
+            for i,val in enumerate(row):
+                str_val = "\033[93m"+str(val)+"\033[0m" if val != 0 else str(val)
+                row_string = row_string +str_val+" " if i not in [2, 5, 8] else row_string + str_val+ " | "
+            print(row_string)
+            if r in [2,5]:
+                print(25*"-")
+        print(25*"-")
+        time.sleep(0.02)
+
     def solve_by_tree(self, depth):
 
         if not self.is_valid:
@@ -118,6 +132,8 @@ class sudoku:
 
         while len(self.singletons) > 0:
             filled_singleton = self.fill_singleton()
+            if self.watch:
+                self.draw_board()
             self.update_possibilities(filled_singleton)
             if not self.is_valid:
                 return False
@@ -130,7 +146,7 @@ class sudoku:
         for i in range(n_possibilities_at_key):
             b = self.get_copy()
             b[key_to_update[0]][key_to_update[1]] = self.possibilities[key_to_update][i]
-            self.branch.append(sudoku(b))
+            self.branch.append(sudoku(b,watch_progression=self.watch))
 
         if depth > self.min_depth:
             solutions = [leaf.solve_by_tree(depth+1) for leaf in self.branch]

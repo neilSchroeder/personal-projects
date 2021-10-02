@@ -9,7 +9,8 @@ def print_board(message, board):
     for r,row in enumerate(board):
         row_string = "| "
         for i,val in enumerate(row):
-            row_string = row_string + str(val)+" " if i not in [2, 5, 8] else row_string + str(val)+ " | "
+            str_val = "\033[93m"+str(val)+"\033[0m" if val != 0 else str(val)
+            row_string = row_string +str_val+" " if i not in [2, 5, 8] else row_string + str_val+ " | "
         print(row_string)
         if r in [2,5]:
             print(25*"-")
@@ -75,9 +76,9 @@ def main():
                   [ 0, 0, 4, 0, 0, 0, 0, 3, 0],
                   [ 0, 0, 0, 0, 0, 9, 7, 0, 0]]
 
-    solve(problem_hard)
-    solve(problem_multiple)
-    solve(problem_multiple_hard)
+    #solve(problem_hard)
+    #solve(problem_multiple)
+    #solve(problem_multiple_hard)
     solve(al_escargo)
 
 if __name__ == '__main__':
