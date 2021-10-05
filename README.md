@@ -18,3 +18,6 @@ This is a repository of both person and work-related projects I've put together 
     public_html:
         A php/css program for setting up a public webpage which displays plots from a linux file system (https://homepages.spa.umn.edu/~schr1077/)
 
+## To Do:
+
+    - pep8 formatting for find24
