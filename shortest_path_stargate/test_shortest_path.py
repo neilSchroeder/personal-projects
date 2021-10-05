@@ -3,23 +3,26 @@ from shortest_path_bfs import shortest_path_bfs
 import time
 import random
 
+
 def main():
-
-
+    """ generates random maps and solves them """
     map_height = 40
     map_width = 150
     number_of_maps = 1000000
     for map_i in range(number_of_maps):
         rand_map = ""
         for i in range(map_height):
-            rand_X = [random.randint(0,1) for i in range(map_width)]
-            row = "".join(["." if rand_X[i] else "X" for i in range(map_width)])
+            rand_X = [random.randint(0, 1) for i in range(map_width)]
+            row = "".join(
+                ["." if rand_X[i] else "X" for i in range(map_width)])
             rand_map = rand_map + row
             if i < map_height-1:
                 rand_map = rand_map + "\n"
 
-        start_loc = (random.randint(0,map_height-1), random.randint(0,map_width-1))
-        end_loc = (random.randint(0,map_height-1), random.randint(0,map_width-1))
+        start_loc = (random.randint(0, map_height-1),
+                     random.randint(0, map_width-1))
+        end_loc = (random.randint(0, map_height-1),
+                   random.randint(0, map_width-1))
         rand_map_list = rand_map.split('\n')
         rand_map_list = [list(row) for row in rand_map_list]
         rand_map_list[start_loc[0]][start_loc[1]] = 'S'
@@ -31,10 +34,8 @@ def main():
         end = time.time()
         print("the shortest path is:")
         print(soln)
-        print("solution was found in", round(end-start,4), "seconds")
+        print("solution was found in", round(end-start, 4), "seconds")
         print()
-        #print("it took", round(end-start,4), "seconds to find the solution")
-        #print()
         time.sleep(5)
 
 
