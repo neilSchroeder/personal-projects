@@ -1,6 +1,6 @@
 # Tools
 
-This is a repository of both person and work-related projects I've put together over the years.
+This is a repository of both personal and work-related projects I've put together over the years.
 
     
     sudoku_solver:
