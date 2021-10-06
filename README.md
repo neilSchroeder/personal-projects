@@ -11,6 +11,9 @@ This is a repository of both personal and work-related projects I've put togethe
 
     find24:
         A python program for very quickly finding a combination of operations on 4 numbers such that the outcome is 24.
+
+    flou:
+        A python program to play flou. IN PROGRESS
     
     bw_conv_cb:
         A python program for fitting a Breit-Wigner distribution convoluted with a Crystal Ball distribution. 
