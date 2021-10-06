@@ -18,6 +18,11 @@ This is a repository of both personal and work-related projects I've put togethe
     public_html:
         A php/css program for setting up a public webpage which displays plots from a linux file system (https://homepages.spa.umn.edu/~schr1077/)
 
+    misc:
+        Some miscellaneous python scripts that do fun things:
+        - password_generator.py: generates a random passphrase/password with varying strengths
+        - fizzbuzz.py: takes in an integer from the user and prints all fizzbuzz up to and including the integer. 
+
 ## To Do:
 
     - pep8 formatting for find24
