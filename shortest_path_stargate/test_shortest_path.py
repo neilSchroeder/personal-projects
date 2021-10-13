@@ -8,8 +8,8 @@ def main():
     """ generates random maps and solves them """
     #random.seed(1)
 
-    map_height = 100
-    map_width = 200
+    map_height = 40
+    map_width = 170
     number_of_maps = 1
     for map_i in range(number_of_maps):
         rand_map = ""
@@ -34,7 +34,7 @@ def main():
         rand_map = '\n'.join([''.join(row) for row in rand_map_list])
 
         start = time.time()
-        soln = shortest_path_bfs(rand_map, watch_evolution=False)
+        soln = shortest_path_bfs(rand_map, watch_evolution=True)
         end = time.time()
         print("the shortest path is:")
         print(soln)

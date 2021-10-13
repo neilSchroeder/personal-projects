@@ -85,8 +85,8 @@ class graph:
                 self.draw_path([x[1] for x in queue], reset=True, symb='Q')
                 time.sleep(0.01)
 
-            if queue and len(queue) > 1:
-                self.draw_path_to_image(queue, final_path=False)
+            #if queue and len(queue) > 1:
+            #    self.draw_path_to_image(queue, final_path=False)
 
         return False
 
