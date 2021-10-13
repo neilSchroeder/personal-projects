@@ -1,6 +1,6 @@
 # Shortest Path: Breadth First Search
 
-A directed breadth first search for path finding through a board with constraints.
+An implementation of the A* search algorithm for finding the shortest path through a board with constraints.
 This problem serves as a refactored solution to this [prompt on codewars.com](https://www.codewars.com/kata/59669eba1b229e32a300001a/train/python).
 
 # Installation and Usage:
@@ -14,8 +14,8 @@ python3 test_shortest_path.py
 
 # Example
 
-![video](example/bfs_example.gif)
+<img src="example/a_star_search.gif" width="600" height="400">
 
 # To Do
 
-Tune sorting hyperparameters [here](https://github.com/neilSchroeder/tools/blob/4ff8fbcd37695959baed98c1716c08108d18e7d6/shortest_path_stargate/graph_bfs_class.py#L62)
+Add in function to check if the board is solvable, or quit out early if the goal can't be reached.
