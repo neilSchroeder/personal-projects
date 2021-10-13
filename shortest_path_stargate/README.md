@@ -14,7 +14,7 @@ python3 test_shortest_path.py
 
 # Example
 
-<img src="example/a_star_search.gif" width="300" height="200">
+<img src="example/a_star_search.gif" width="600" height="400">
 
 Here is a visualization of the search algorithm and it's priority queue. During
 the search, red indicates a lower priority (meaning it will be explored first),
