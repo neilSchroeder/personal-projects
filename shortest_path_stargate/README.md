@@ -14,12 +14,12 @@ python3 test_shortest_path.py
 
 # Example
 
-<img src="example/a_star_search.gif" width="600" height="400">
+<img src="example/a_star_search.gif" width="300" height="200">
 
 Here is a visualization of the search algorithm and it's priority queue. During
 the search, red indicates a lower priority (meaning it will be explored first),
 while blue indicates a higher priority (meaning it will be explored last). For
-the sake of compression this gif includes only every 20 frames of the priority
+the sake of compression this gif includes only 1 in every 20 frames of the priority
 queue.
 
 # To Do
