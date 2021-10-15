@@ -10,7 +10,7 @@ def main():
 
     map_height = 40
     map_width = 170
-    number_of_maps = 1
+    number_of_maps = 1000
     for map_i in range(number_of_maps):
         rand_map = ""
         for i in range(map_height):
@@ -21,12 +21,12 @@ def main():
             if i < map_height-1:
                 rand_map = rand_map + "\n"
 
-        #start_loc = (random.randint(0, map_height-1),
-        #             random.randint(0, map_width-1))
-        #end_loc = (random.randint(0, map_height-1),
-        #           random.randint(0, map_width-1))
-        start_loc = (0, 0)
-        end_loc = (map_height-1, map_width-1)
+        start_loc = (random.randint(0, map_height-1),
+                     random.randint(0, map_width-1))
+        end_loc = (random.randint(0, map_height-1),
+                   random.randint(0, map_width-1))
+        #start_loc = (0, 0)
+        #end_loc = (map_height-1, map_width-1)
         rand_map_list = rand_map.split('\n')
         rand_map_list = [list(row) for row in rand_map_list]
         rand_map_list[start_loc[0]][start_loc[1]] = 'S'

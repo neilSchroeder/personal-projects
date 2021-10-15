@@ -64,7 +64,8 @@ class graph:
             n = self.nodes[tup[1]]
 
             if n.loc == self.goal_node_coords:
-                self.draw_path_to_image(self.get_path(n.loc), final_path=True)
+                self.draw_path(self.get_path(n.loc))
+                #self.draw_path_to_image(self.get_path(n.loc), final_path=True)
                 return True
 
             if not n.is_active:
@@ -83,7 +84,7 @@ class graph:
 
             if self.watch_evolution and queue:
                 self.draw_path([x[1] for x in queue], reset=True, symb='Q')
-                time.sleep(0.01)
+                time.sleep(0.005)
 
             #if queue and len(queue) > 1:
             #    self.draw_path_to_image(queue, final_path=False)
@@ -105,7 +106,7 @@ class graph:
 
         if reset:
             print('\n'.join([''.join(row) for row in self.map]))
-            print()
+            print(flush=True)
             for coord in changed_coords:
                 if coord != snc and coord != gnc:
                     self.map[coord[0]][coord[1]] = '.'

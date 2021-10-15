@@ -33,7 +33,7 @@ class node:
 
     def set_path_length(self, pl):
         self.path_length = pl
-        x = 0.0
+        x = 0.00
         self.cost = (1+x)*self.distance_to_goal + (1-x)*pl
 
     def get_neighboring_nodes(self):
