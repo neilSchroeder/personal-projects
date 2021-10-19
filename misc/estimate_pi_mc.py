@@ -3,11 +3,10 @@ import numpy as np
 
 def pi_from_random(n):
     """ from a flat random distribution of numbers between 0 and 1, calculate pi """
-    x_vals = np.random.random(n)
-    y_vals = np.random.random(n)
-    r_vals = np.sqrt(np.add(np.power(x_vals,2),np.power(y_vals,2)))
-    r_vals = r_vals[r_vals <= 1]
-    return 4*len(r_vals)/float(n)
+    area_circle = 0
+    for i in range(n):
+        area_circle += int( (rand.random()**2 + rand.random()**2) <= 1)
+    return 4*float(area_circle)/float(n)
     
 
 def main():
