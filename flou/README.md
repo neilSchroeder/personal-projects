@@ -4,4 +4,4 @@ This python plays the game [flou](https://gameforge.com/en-US/littlegames/flou/#
 
 ## Notes
 
-This was particularly challenging to solve in the time constraint given my approach. I managed to just squeak in under the wire using line_profiler and kernprof to optimize the code.
+This was particularly challenging to solve in the time constraint. I used line_profiler and kernprof to optimize the code.
