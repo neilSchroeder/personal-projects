@@ -4,4 +4,4 @@ This is a python implementation of John Conway's Game of Life. The game starts w
 
 ## Example:
 
-<img=example/game_of_life.gif>
+<img src="example/game_of_life.gif">
