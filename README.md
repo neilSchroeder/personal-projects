@@ -9,6 +9,9 @@ This is a repository of both personal and work-related projects I've put togethe
     shortest_path_stargate:
         A python program for quickly finding the shortest path between two points on a board with constraints using a directed breath first search.
 
+    life:
+        A fairly simply python program which plays John Conway's Game of Life
+
     find24:
         A python program for very quickly finding a combination of operations on 4 numbers such that the outcome is 24.
 
@@ -29,4 +32,5 @@ This is a repository of both personal and work-related projects I've put togethe
 
 ## To Do:
 
+    - build algorithm for solving the sliding puzzle
     - pep8 formatting for find24
