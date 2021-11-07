@@ -16,7 +16,7 @@ class board:
         pass
 
     def create_board(self):
-        return {loc: cell(loc, bool(rand.randint(0,1))) for loc in itertools.product(range(self.height), range(self.width))}
+        return {loc: cell(loc, rand.randint(0,1) == 0) for loc in itertools.product(range(self.height), range(self.width))}
 
     def determine_survival(self):
         """ determines if each cell will live or die """
