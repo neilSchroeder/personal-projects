@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
-import numpy as np
 import argparse as ap
-#import pygame as pg
- 
 from python.classes.board_class import board
+
 
 def main():
     #plays the game of life
