@@ -10,7 +10,10 @@ This is a repository of both personal and work-related projects I've put togethe
         A python program for quickly finding the shortest path between two points on a board with constraints using a directed breath first search.
 
     life:
-        A fairly simply python program which plays John Conway's Game of Life
+        A fairly simply python program which plays John Conway's Game of Life.
+
+    minesweeper:
+        A python program for solving minesweeper.
 
     find24:
         A python program for very quickly finding a combination of operations on 4 numbers such that the outcome is 24.
@@ -26,9 +29,10 @@ This is a repository of both personal and work-related projects I've put togethe
 
     misc:
         Some miscellaneous python scripts that do fun things:
-        - password_generator.py: generates a random passphrase/password with varying strengths
-        - fizzbuzz.py: takes in an integer from the user and prints all fizzbuzz up to and including the integer. 
-        - estimate_pi_mc.py: takes in an integer from the user and uses it to estimate pi using the monte-carlo approach.
+        * password_generator.py: generates a random passphrase/password with varying strengths
+        * fizzbuzz.py: takes in an integer from the user and prints all fizzbuzz up to and including the integer. 
+        * estimate_pi_mc.py: takes in an integer from the user and uses it to estimate pi using the monte-carlo approach.
+        * logistic.py: allows the user to play around with logistic mapping from chaos theory
 
 ## To Do:
 
