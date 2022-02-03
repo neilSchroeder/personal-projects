@@ -9,6 +9,9 @@ This is a repository of both personal and work-related projects I've put togethe
     shortest_path_stargate:
         A python program for quickly finding the shortest path between two points on a board with constraints using a directed breath first search.
 
+    minesweeper:
+        A python program for solving minesweeper. 
+
     life:
         A fairly simply python program which plays John Conway's Game of Life.
 
@@ -26,6 +29,9 @@ This is a repository of both personal and work-related projects I've put togethe
 
     public_html:
         A php/css program for setting up a public webpage which displays plots from a linux file system (https://homepages.spa.umn.edu/~schr1077/)
+
+    golang:
+        A bit of golang just to start getting the hang of it.
 
     misc:
         Some miscellaneous python scripts that do fun things:
