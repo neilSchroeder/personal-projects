@@ -6,6 +6,10 @@ from scipy.special import xlogy
 from scipy.signal import fftconvolve
 import matplotlib.pyplot as plt
 
+def get_chi_sqr(a, b):
+    c = np.sum(a)*b / np.sum(b)
+    return np.sum(np.divide(np.multiply(a-c,a-c),a))/(len(a)-1)
+
 def NLL(a,b):
 
     nll = xlogy(a,b)
@@ -15,14 +19,11 @@ def NLL(a,b):
     penalty = xlogy(np.sum(a) - a, 1 - b)
     penalty[penalty==-np.inf] = 0
     penalty = np.sum(penalty)/len(penalty)
-
-    b = np.sum(a)*b/np.sum(b)
-    chi_sqr = np.sum(np.divide(np.multiply(a-b,a-b),a))/(len(a)-1)
     
-    return -2*(nll+penalty)*chi_sqr
+    return -2*(nll+penalty)
 
 
-def target(guess):
+def target(guess, chi_sqr=False):
     global thisBW
     global thisCB
     global _DATA_
@@ -32,7 +33,10 @@ def target(guess):
     y_vals = np.convolve(thisBW.y,thisCB.y,mode='same')
     y_vals = y_vals/np.sum(y_vals)
 
-    return NLL(_DATA_,y_vals)
+    if chi_sqr:
+        return get_chi_sqr(_DATA_, y_vals)
+
+    return NLL(_DATA_,y_vals) * get_chi_sqr(_DATA_, y_vals)
 
 def scan(guess):
     global thisBW
@@ -69,52 +73,40 @@ def scan(guess):
   
     return ret
 
-def errors(result,min_chi):
+def errors(result):
+    """
+    Returns the error on the fit parameters:
+    works by finding the edges of the region at which the target function increases by 68.3%
+    """
 
     ret = []
+    result = [x for x in result]
 
-    scan_cv = np.arange(result[0]-2*result[4], result[0]+2*result[4], 0.0001)
-    scan_mean = np.arange(-(2*abs(result[3])),2*abs(result[3]),0.0001)
-    scan_width = np.arange(0.0001,2*result[4],0.0001)
+    # generate scan values (+- 10% of value)
+    val = 0.1
+    scan_vals = [np.arange(x*(1-val*np.sign(x)), x*(1+val*np.sign(x)), 0.01) for x in result]
 
-    par_set_cv = [[x ,result[1], result[2], result[3], result[4]] for x in scan_cv]
-    par_set_mean = [[result[0],result[1],result[2],x,result[4]] for x in scan_mean]
-    par_set_width = [[result[0],result[1],result[2],result[3],x] for x in scan_width]
+    # loop over scan vals and evaluate NLL on each
+    for iii,vals in enumerate(scan_vals):
 
-    chi_cv = np.array([target(x) for x in par_set_cv])
-    chi_mean = np.array([target(x) for x in par_set_mean])
-    chi_width = np.array([target(x) for x in par_set_width])
+        # create the parameter sets to evaluate the chi_sqr on  
+        par_set = [result[:iii] + [x] + result[iii+1:] for x in vals]
 
-    sigma_mask_cv = chi_cv >= np.e * min(chi_cv)
-    sigma_mask_mean = chi_mean >= np.e * min(chi_mean)
-    sigma_mask_width = chi_width >= np.e * min(chi_width)
+        # evaluate chi for all "scan values"
+        chi_vals = np.array([target(x) for x in par_set])
+        chi_mask = chi_vals <= np.min(chi_vals)*1.683
+        locs = np.where(chi_mask == True)
+        while len(locs) == 0 and val < 1:
+            val += 0.1
+            scan_vals[iii] = np.arange(result[iii]*(1-val), result[iii]*(1+val), 0.01)
+            par_set = [result[:iii] + [x] + result[iii+1:] for x in vals]
+            chi_vals = np.array([target(x, chi_sqr=True) for x in par_set])
+            locs = np.where(chi_mask == True)
 
-    val = []
-    for i in range(len(sigma_mask_cv)-1):
-        if sigma_mask_cv[i] and not sigma_mask_cv[i+1]:
-            val.append(result[0]-scan_cv[i])
-        if not sigma_mask_cv[i] and sigma_mask_cv[i+1]:
-            val.append(scan_cv[i]-result[0])
-            break
-    ret.append(val)
-
-    val = []
-    for i in range(len(sigma_mask_mean)-1):
-        if sigma_mask_mean[i] and not sigma_mask_mean[i+1]:
-            val.append(result[3]-scan_mean[i])
-        if not sigma_mask_mean[i] and sigma_mask_mean[i+1]:
-            val.append(scan_mean[i]-result[3])
-            break
-    ret.append(val)
-
-    val = []
-    for i in range(len(sigma_mask_width)-1):
-        if sigma_mask_width[i] and not sigma_mask_width[i+1]:
-            val.append(result[4]-scan_width[i])
-        if not sigma_mask_width[i] and sigma_mask_width[i+1]:
-            val.append(scan_width[i]-result[4])
-            break
-    ret.append(val)
+        if len(locs) == 0:
+            ret.append((result[iii], result[iii]))
+        else:
+            ret.append((abs(result[iii] - vals[locs[0][0]]), abs(result[iii] - vals[locs[0][-1]])))
 
     return ret
             
@@ -137,8 +129,6 @@ def fit(x,y):
     thisCB = crystalBall.cb(x, guess)
     guess = scan(guess)
     
-
-    print(guess)
     result = minimize(target, 
             np.array(guess), 
             method="L-BFGS-B",
@@ -146,20 +136,21 @@ def fit(x,y):
             options={"eps":0.0001}
             )
 
-    print(result)
+    #print(result)
+    if not result.success:
+        raise Exception
+
     thisBW.update(result.x[0])
     thisCB.update(result.x[1::])
     y_vals = np.convolve(thisBW.y,thisCB.y,mode='same')
     y_vals = np.sum(y)*y_vals/np.sum(y_vals)
-    chi_sqr = np.sum(np.divide(np.multiply(y-y_vals,y-y_vals),y))/len(y)
-    uncertainties = errors(result.x, result.fun) 
-
-    print("minimization complete:")
-    print("mu:", result.x[0]+result.x[3], "+/-", np.sqrt(max(np.abs(uncertainties[0][0]),np.abs(uncertainties[0][1]) )**2 + max(np.abs(uncertainties[1][0]),np.abs(uncertainties[1][1]) ) ))
-    print("sigma:", result.x[4], "+/-", max(np.abs(uncertainties[2][0]),np.abs(uncertainties[2][1])))
-    print("reduced chi squared:", chi_sqr)
-    print()
+    print(y_vals)
+    chi_sqr = np.sum(np.divide(np.multiply(y-y_vals,y-y_vals),y))/(len(y)-len(result.x))
+    #uncertainties = errors(result.x) 
+    
+    """
     print("plotting")
+    print(y)
 
     fig,axs = plt.subplots(ncols=1,nrows=1) 
     axs.scatter(x,
@@ -176,5 +167,8 @@ def fit(x,y):
     axs.legend(loc='best')
     fig.savefig("fit.png")
     plt.close(fig)
-    return
+    """
+    
+    #return result.x[0]+result.x[3], np.sqrt(np.max(np.abs(uncertainties[0]))**2 + np.max(np.abs(uncertainties[3]))**2 ), chi_sqr
+    return result.x[0]+result.x[3], chi_sqr
     
