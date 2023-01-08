@@ -17,8 +17,8 @@ def main():
     cdf = cdf / cdf[-1]
 
     count = 0
-    m = 1
-    n = 1000
+    m = 10
+    n = 5000
     for i in range(m):
         if i+1 % 100 == 0:
             print(f"{i+1}/{m}   ")
@@ -26,16 +26,17 @@ def main():
         value_bins = np.searchsorted(cdf, values)
         random_from_cdf = [x_vals[x] for x in value_bins]
 
-        y_vals, bins = np.histogram(random_from_cdf, bins=24, range=(80, 100))
+        y_vals, bins = np.histogram(random_from_cdf, bins=48, range=(80, 100))
         new_x_vals = [(bins[i]+bins[i+1])/2 for i in range(len(bins)-1)]
 
-        try:
-            x, x_err, chi = fit.fit(new_x_vals, y_vals)
-            print(f"fit quality: {chi:.2f}")
-        except Exception:
-            count += 1
+        result, chi = fit.fit(new_x_vals, y_vals)
+        count += result.success
+        if not result.success:
+            print(result)
+        print(f"fit quality: {chi:.2f}")
+        #print(result.x[0]+result.x[3])
 
-    print(f"the fit has a {100*(m - count)/m}% success rate at {n =}" )
+    print(f"success rate: {100*count/m}%")
 
 
 if __name__ == '__main__':

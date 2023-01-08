@@ -3,7 +3,6 @@ import crystalBall
 import numpy as np
 from scipy.optimize import minimize
 from scipy.special import xlogy
-from scipy.signal import fftconvolve
 import matplotlib.pyplot as plt
 
 def get_chi_sqr(a, b):
@@ -30,13 +29,14 @@ def target(guess, chi_sqr=False):
 
     thisBW.update(guess[0])
     thisCB.update(guess[1::])
-    y_vals = np.convolve(thisBW.y,thisCB.y,mode='same')
+    y_vals = np.convolve(thisBW.y,thisCB.y, mode='same')
     y_vals = y_vals/np.sum(y_vals)
 
     if chi_sqr:
         return get_chi_sqr(_DATA_, y_vals)
 
-    return NLL(_DATA_,y_vals) * get_chi_sqr(_DATA_, y_vals)
+    ret = NLL(_DATA_,y_vals) * get_chi_sqr(_DATA_, y_vals)
+    return ret
 
 def scan(guess):
     global thisBW
@@ -48,7 +48,7 @@ def scan(guess):
     scan_cv = np.arange(85,93,0.01)
     scan_alpha = np.arange(0.1,100,0.5)
     scan_n = np.arange(0.1,10,0.5)
-    scan_mean = np.arange(-5,5,0.025)
+    scan_mean = np.arange(-2,2,0.025)
     scan_width = np.arange(0.1,10,0.1)
 
     guesses_cv = [[x, ret[1], ret[2], ret[3], ret[4]] for x in scan_cv]
@@ -121,9 +121,9 @@ def fit(x,y):
     cv = 91.188
     mean = 91.188 - np.average(x,weights=y)
     width = np.sqrt(np.average(np.multiply(x-np.average(x,weights=y),x-np.average(x,weights=y)), weights=y))
-    guess = [cv, 1.424,1.86,mean,width]
+    guess = [cv, 1.2, 1.46,mean,width]
 
-    bounds = [(86, 92), (0.01,100), (0.01,10), (-5,5), (0.1,10)]
+    bounds = [(87, 92), (0.1,10), (0.1,20), (-2,3), (0.1,10)]
 
     thisBW = breitWigner.bw(x)
     thisCB = crystalBall.cb(x, guess)
@@ -137,8 +137,9 @@ def fit(x,y):
             )
 
     #print(result)
-    if not result.success:
-        raise Exception
+    #if not result.success:
+        #print(result)
+        #raise Exception
 
     thisBW.update(result.x[0])
     thisCB.update(result.x[1::])
@@ -148,9 +149,8 @@ def fit(x,y):
     chi_sqr = np.sum(np.divide(np.multiply(y-y_vals,y-y_vals),y))/(len(y)-len(result.x))
     #uncertainties = errors(result.x) 
     
-    """
+    
     print("plotting")
-    print(y)
 
     fig,axs = plt.subplots(ncols=1,nrows=1) 
     axs.scatter(x,
@@ -167,8 +167,7 @@ def fit(x,y):
     axs.legend(loc='best')
     fig.savefig("fit.png")
     plt.close(fig)
-    """
     
-    #return result.x[0]+result.x[3], np.sqrt(np.max(np.abs(uncertainties[0]))**2 + np.max(np.abs(uncertainties[3]))**2 ), chi_sqr
-    return result.x[0]+result.x[3], chi_sqr
+    
+    return result, chi_sqr
     

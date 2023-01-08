@@ -11,6 +11,8 @@ from torch.nn import functional as F
 from torchvision.transforms import CenterCrop
 import torch
 
+import pytorch_lightning as pl
+
 
 class Block(Module):
     def __init__(self, inChannels, outChannels):
@@ -90,7 +92,7 @@ class Decoder(Module):
         return x
 
     
-class UNet(Module):
+class UNet(pl.LightningModule):
     def __init__(self, encChannels=config.UNET_ENC_CHANNELS, 
                        decChannels=config.UNET_DEC_CHANNELS,
                        nbClasses=config.UNET_NUM_CLASSES,
@@ -120,5 +122,15 @@ class UNet(Module):
             map = F.interpolate(map, self.outSize)
 
         return map
+
+    def training_step(self, batch, batch_idx):
+        x, y = batch
+        y_hat = self(x) # these are the values predicted by the UNet
+        loss = config.UNET_LOSS(y_hat, y)
+        self.log("train_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
+        return loss
+
+    def configure_optimizers(self):
+        return torch.optim.Adam(self.parameters(), lr=config.INIT_LR)
 
 
