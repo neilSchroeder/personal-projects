@@ -1,0 +1,7 @@
+# Ignore GIF files in the reports/visualizations directory
+reports/visualizations/*.gif
+# Ignore TXT files in the reports directory
+reports/*.txt
+# Ignore video files in the videos directory
+videos/*
+**/*cache*/
