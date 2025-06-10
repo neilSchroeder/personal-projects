@@ -1,0 +1,276 @@
+graph TD
+    setup["setup"]
+    tests["tests"]
+    tests/create_test_dataset["tests.create_test_dataset"]
+    tests -.-> tests/create_test_dataset
+    tests/create_test_dataarrays_single_cell["tests.create_test_dataarrays_single_cell"]
+    tests -.-> tests/create_test_dataarrays_single_cell
+    tests/create_test_dataset_daily["tests.create_test_dataset_daily"]
+    tests -.-> tests/create_test_dataset_daily
+    tests/create_test_dataset_hourly["tests.create_test_dataset_hourly"]
+    tests -.-> tests/create_test_dataset_hourly
+    tests/conftest["tests.conftest"]
+    tests -.-> tests/conftest
+    tests/threshold_tools["tests.threshold_tools"]
+    tests -.-> tests/threshold_tools
+    tests/threshold_tools/test_thresholds_exceedance["tests.threshold_tools.test_thresholds_exceedance"]
+    tests/threshold_tools -.-> tests/threshold_tools/test_thresholds_exceedance
+    tests/threshold_tools/test_thresholds_returns["tests.threshold_tools.test_thresholds_returns"]
+    tests/threshold_tools -.-> tests/threshold_tools/test_thresholds_returns
+    tests/vulnerability["tests.vulnerability"]
+    tests -.-> tests/vulnerability
+    tests/vulnerability/test_vulnerability["tests.vulnerability.test_vulnerability"]
+    tests/vulnerability -.-> tests/vulnerability/test_vulnerability
+    tests/derived_variables["tests.derived_variables"]
+    tests -.-> tests/derived_variables
+    tests/derived_variables/test_derived_variables["tests.derived_variables.test_derived_variables"]
+    tests/derived_variables -.-> tests/derived_variables/test_derived_variables
+    tests/data_interface["tests.data_interface"]
+    tests -.-> tests/data_interface
+    tests/data_interface/test_variable_descriptions_csv["tests.data_interface.test_variable_descriptions_csv"]
+    tests/data_interface -.-> tests/data_interface/test_variable_descriptions_csv
+    tests/data_interface/test_get_data["tests.data_interface.test_get_data"]
+    tests/data_interface -.-> tests/data_interface/test_get_data
+    tests/indices["tests.indices"]
+    tests -.-> tests/indices
+    tests/indices/test_indices["tests.indices.test_indices"]
+    tests/indices -.-> tests/indices/test_indices
+    tests/data_load["tests.data_load"]
+    tests -.-> tests/data_load
+    tests/data_load/test_unit_error["tests.data_load.test_unit_error"]
+    tests/data_load -.-> tests/data_load/test_unit_error
+    tests/data_load/test_sim_dimension["tests.data_load.test_sim_dimension"]
+    tests/data_load -.-> tests/data_load/test_sim_dimension
+    tests/util["tests.util"]
+    tests -.-> tests/util
+    tests/util/test_gwl_times["tests.util.test_gwl_times"]
+    tests/util -.-> tests/util/test_gwl_times
+    tests/unit_conversions["tests.unit_conversions"]
+    tests -.-> tests/unit_conversions
+    tests/unit_conversions/test_unit_conversions["tests.unit_conversions.test_unit_conversions"]
+    tests/unit_conversions -.-> tests/unit_conversions/test_unit_conversions
+    tests/timeseriestools["tests.timeseriestools"]
+    tests -.-> tests/timeseriestools
+    tests/timeseriestools/test_timeseriestools_monthly["tests.timeseriestools.test_timeseriestools_monthly"]
+    tests/timeseriestools -.-> tests/timeseriestools/test_timeseriestools_monthly
+    climakitae["climakitae"]
+    climakitae/explore["climakitae.explore"]
+    climakitae -.-> climakitae/explore
+    climakitae/explore/vulnerability["climakitae.explore.vulnerability"]
+    climakitae/explore -.-> climakitae/explore/vulnerability
+    climakitae/explore/amy["climakitae.explore.amy"]
+    climakitae/explore -.-> climakitae/explore/amy
+    climakitae/explore/threshold_tools["climakitae.explore.threshold_tools"]
+    climakitae/explore -.-> climakitae/explore/threshold_tools
+    climakitae/explore/vulnerability_table["climakitae.explore.vulnerability_table"]
+    climakitae/explore -.-> climakitae/explore/vulnerability_table
+    climakitae/explore/uncertainty["climakitae.explore.uncertainty"]
+    climakitae/explore -.-> climakitae/explore/uncertainty
+    climakitae/explore/agnostic["climakitae.explore.agnostic"]
+    climakitae/explore -.-> climakitae/explore/agnostic
+    climakitae/explore/timeseries["climakitae.explore.timeseries"]
+    climakitae/explore -.-> climakitae/explore/timeseries
+    climakitae/explore/warming["climakitae.explore.warming"]
+    climakitae/explore -.-> climakitae/explore/warming
+    climakitae/explore/thresholds["climakitae.explore.thresholds"]
+    climakitae/explore -.-> climakitae/explore/thresholds
+    climakitae/core["climakitae.core"]
+    climakitae -.-> climakitae/core
+    climakitae/core/data_load["climakitae.core.data_load"]
+    climakitae/core -.-> climakitae/core/data_load
+    climakitae/core/constants["climakitae.core.constants"]
+    climakitae/core -.-> climakitae/core/constants
+    climakitae/core/paths["climakitae.core.paths"]
+    climakitae/core -.-> climakitae/core/paths
+    climakitae/core/data_interface["climakitae.core.data_interface"]
+    climakitae/core -.-> climakitae/core/data_interface
+    climakitae/core/data_export["climakitae.core.data_export"]
+    climakitae/core -.-> climakitae/core/data_export
+    climakitae/core/boundaries["climakitae.core.boundaries"]
+    climakitae/core -.-> climakitae/core/boundaries
+    climakitae/util["climakitae.util"]
+    climakitae -.-> climakitae/util
+    climakitae/util/utils["climakitae.util.utils"]
+    climakitae/util -.-> climakitae/util/utils
+    climakitae/util/generate_gwl_tables["climakitae.util.generate_gwl_tables"]
+    climakitae/util -.-> climakitae/util/generate_gwl_tables
+    climakitae/util/generate_gwl_timing_table["climakitae.util.generate_gwl_timing_table"]
+    climakitae/util -.-> climakitae/util/generate_gwl_timing_table
+    climakitae/util/warming_levels["climakitae.util.warming_levels"]
+    climakitae/util -.-> climakitae/util/warming_levels
+    climakitae/util/cluster["climakitae.util.cluster"]
+    climakitae/util -.-> climakitae/util/cluster
+    climakitae/util/dev_logging["climakitae.util.dev_logging"]
+    climakitae/util -.-> climakitae/util/dev_logging
+    climakitae/util/logger["climakitae.util.logger"]
+    climakitae/util -.-> climakitae/util/logger
+    climakitae/util/colormap["climakitae.util.colormap"]
+    climakitae/util -.-> climakitae/util/colormap
+    climakitae/util/unit_conversions["climakitae.util.unit_conversions"]
+    climakitae/util -.-> climakitae/util/unit_conversions
+    climakitae/util/generate_gwl_tables_unc["climakitae.util.generate_gwl_tables_unc"]
+    climakitae/util -.-> climakitae/util/generate_gwl_tables_unc
+    climakitae/tools["climakitae.tools"]
+    climakitae -.-> climakitae/tools
+    climakitae/tools/indices["climakitae.tools.indices"]
+    climakitae/tools -.-> climakitae/tools/indices
+    climakitae/tools/derived_variables["climakitae.tools.derived_variables"]
+    climakitae/tools -.-> climakitae/tools/derived_variables
+    climakitae/tools/batch["climakitae.tools.batch"]
+    climakitae/tools -.-> climakitae/tools/batch
+    docs["docs"]
+    docs/conf["docs.conf"]
+    docs -.-> docs/conf
+    tests/create_test_dataset --> climakitae/core/data_load
+    tests/create_test_dataset --> climakitae/core/constants
+    tests/create_test_dataset --> climakitae/core/data_interface
+    tests/create_test_dataarrays_single_cell --> climakitae/core/data_interface
+    tests/create_test_dataarrays_single_cell --> climakitae/util/utils
+    tests/create_test_dataset_daily --> climakitae/core/data_interface
+    tests/create_test_dataset_hourly --> climakitae/core/data_interface
+    tests/threshold_tools/test_thresholds_exceedance --> climakitae/explore/threshold_tools
+    tests/threshold_tools/test_thresholds_returns --> climakitae/explore/threshold_tools
+    tests/vulnerability/test_vulnerability --> climakitae/explore/vulnerability
+    tests/vulnerability/test_vulnerability --> climakitae/explore/vulnerability
+    tests/vulnerability/test_vulnerability --> climakitae/explore/vulnerability
+    tests/vulnerability/test_vulnerability --> climakitae/explore/vulnerability
+    tests/derived_variables/test_derived_variables --> climakitae/tools/derived_variables
+    tests/derived_variables/test_derived_variables --> climakitae/tools/derived_variables
+    tests/derived_variables/test_derived_variables --> climakitae/tools/derived_variables
+    tests/derived_variables/test_derived_variables --> climakitae/tools/derived_variables
+    tests/derived_variables/test_derived_variables --> climakitae/tools/derived_variables
+    tests/data_interface/test_variable_descriptions_csv --> climakitae/core/data_interface
+    tests/data_interface/test_get_data --> climakitae/core/data_interface
+    tests/indices/test_indices --> climakitae/tools/indices
+    tests/indices/test_indices --> climakitae/tools/indices
+    tests/indices/test_indices --> climakitae/util/unit_conversions
+    tests/indices/test_indices --> climakitae/tools/derived_variables
+    tests/indices/test_indices --> climakitae/tools/indices
+    tests/indices/test_indices --> climakitae/tools/derived_variables
+    tests/data_load/test_unit_error --> climakitae/core/data_interface
+    tests/data_load/test_sim_dimension --> climakitae/util/utils
+    tests/data_load/test_sim_dimension --> climakitae/util/utils
+    tests/data_load/test_sim_dimension --> climakitae/core/data_load
+    tests/data_load/test_sim_dimension --> climakitae/core/data_interface
+    tests/util/test_gwl_times --> climakitae/util/utils
+    tests/util/test_gwl_times --> climakitae/core/paths
+    tests/util/test_gwl_times --> climakitae/core/paths
+    tests/unit_conversions/test_unit_conversions --> climakitae/util/unit_conversions
+    tests/timeseriestools/test_timeseriestools_monthly --> climakitae/explore/timeseries
+    climakitae --> climakitae/core/data_load
+    climakitae --> climakitae/core/data_export
+    climakitae/explore/vulnerability --> climakitae/explore/threshold_tools
+    climakitae/explore/vulnerability --> climakitae/explore/threshold_tools
+    climakitae/explore/vulnerability --> climakitae/util/utils
+    climakitae/explore/vulnerability --> climakitae/core/constants
+    climakitae/explore/vulnerability --> climakitae/core/data_export
+    climakitae/explore/vulnerability --> climakitae/tools/batch
+    climakitae/explore/vulnerability --> climakitae/core/data_load
+    climakitae/explore/vulnerability --> climakitae/util/utils
+    climakitae/explore/vulnerability --> climakitae/core/constants
+    climakitae/explore/vulnerability --> climakitae/core/constants
+    climakitae/explore/vulnerability --> climakitae/explore
+    climakitae/explore/vulnerability --> climakitae/core/constants
+    climakitae/explore/vulnerability --> climakitae/core/data_interface
+    climakitae/explore/vulnerability --> climakitae/explore/threshold_tools
+    climakitae/explore/amy --> climakitae/util/utils
+    climakitae/explore/amy --> climakitae/core/data_load
+    climakitae/explore/vulnerability_table --> climakitae/explore/vulnerability
+    climakitae/explore/uncertainty --> climakitae/core/data_load
+    climakitae/explore/uncertainty --> climakitae/util/utils
+    climakitae/explore/uncertainty --> climakitae/core/data_interface
+    climakitae/explore/uncertainty --> climakitae/core/paths
+    climakitae/explore/uncertainty --> climakitae/core/paths
+    climakitae/explore/agnostic --> climakitae/util/utils
+    climakitae/explore/agnostic --> climakitae/util/unit_conversions
+    climakitae/explore/agnostic --> climakitae/core/paths
+    climakitae/explore/agnostic --> climakitae/util/logger
+    climakitae/explore/agnostic --> climakitae/util/utils
+    climakitae/explore/agnostic --> climakitae/core/paths
+    climakitae/explore/agnostic --> climakitae/core/data_load
+    climakitae/explore/agnostic --> climakitae/core/data_interface
+    climakitae/explore/agnostic --> climakitae/core/data_interface
+    climakitae/explore/agnostic --> climakitae/core/data_interface
+    climakitae/explore/agnostic --> climakitae/core/constants
+    climakitae/explore/agnostic --> climakitae/core/data_interface
+    climakitae/explore --> climakitae/explore/warming
+    climakitae/explore/warming --> climakitae/util/utils
+    climakitae/explore/warming --> climakitae/util/utils
+    climakitae/explore/warming --> climakitae/core/paths
+    climakitae/explore/warming --> climakitae/util/utils
+    climakitae/explore/warming --> climakitae/core/constants
+    climakitae/explore/warming --> climakitae/core/data_load
+    climakitae/explore/warming --> climakitae/core/paths
+    climakitae/explore/warming --> climakitae/core/data_interface
+    climakitae/explore/thresholds --> climakitae/core/data_load
+    climakitae/core/data_load --> climakitae/util/warming_levels
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/util/unit_conversions
+    climakitae/core/data_load --> climakitae/tools/derived_variables
+    climakitae/core/data_load --> climakitae/tools/derived_variables
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/tools/derived_variables
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/core/boundaries
+    climakitae/core/data_load --> climakitae/tools/indices
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/tools/indices
+    climakitae/core/data_load --> climakitae/util/unit_conversions
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/util/utils
+    climakitae/core/data_load --> climakitae/tools/derived_variables
+    climakitae/core/data_load --> climakitae/util/warming_levels
+    climakitae/core/data_load --> climakitae/tools/indices
+    climakitae/core/data_load --> climakitae/tools/derived_variables
+    climakitae/core/data_interface --> climakitae/util/utils
+    climakitae/core/data_interface --> climakitae/util/unit_conversions
+    climakitae/core/data_interface --> climakitae/util/utils
+    climakitae/core/data_interface --> climakitae/core/paths
+    climakitae/core/data_interface --> climakitae/core/paths
+    climakitae/core/data_interface --> climakitae/util/utils
+    climakitae/core/data_interface --> climakitae/util/utils
+    climakitae/core/data_interface --> climakitae/core/boundaries
+    climakitae/core/data_interface --> climakitae/core/data_load
+    climakitae/core/data_interface --> climakitae/core/paths
+    climakitae/core/data_interface --> climakitae/core/constants
+    climakitae/core/data_interface --> climakitae/core/paths
+    climakitae/core/data_interface --> climakitae/util/utils
+    climakitae/core/data_interface --> climakitae/util/utils
+    climakitae/core/data_interface --> climakitae/core/paths
+    climakitae/core/data_interface --> climakitae/core/constants
+    climakitae/core/data_interface --> climakitae/core/data_load
+    climakitae/core/data_export --> climakitae/util/utils
+    climakitae/core/data_export --> climakitae/core/paths
+    climakitae/core/data_export --> climakitae/core/paths
+    climakitae/core/data_export --> climakitae/core/paths
+    climakitae/util/utils --> climakitae/core/paths
+    climakitae/util/utils --> climakitae/core/constants
+    climakitae/util/utils --> climakitae/core/paths
+    climakitae/util/generate_gwl_tables --> climakitae/util/utils
+    climakitae/util/generate_gwl_tables --> climakitae/core/constants
+    climakitae/util/generate_gwl_timing_table --> climakitae/core/paths
+    climakitae/util/generate_gwl_timing_table --> climakitae/util/utils
+    climakitae/util/generate_gwl_timing_table --> climakitae/core/paths
+    climakitae/util/generate_gwl_timing_table --> climakitae/core/paths
+    climakitae/util/generate_gwl_timing_table --> climakitae/util/utils
+    climakitae/util/generate_gwl_timing_table --> climakitae/core/paths
+    climakitae/util/generate_gwl_timing_table --> climakitae/core/paths
+    climakitae/util/warming_levels --> climakitae/util/utils
+    climakitae/util/warming_levels --> climakitae/util/utils
+    climakitae/util/warming_levels --> climakitae/util/utils
+    climakitae/util/warming_levels --> climakitae/util/utils
+    climakitae/util/warming_levels --> climakitae/util/utils
+    climakitae/util/colormap --> climakitae/util/utils
+    climakitae/util/colormap --> climakitae/core/paths
+    climakitae/util/colormap --> climakitae/core/paths
+    climakitae/util/colormap --> climakitae/core/paths
+    climakitae/util/colormap --> climakitae/core/paths
+    climakitae/util/colormap --> climakitae/core/paths
+    climakitae/util/generate_gwl_tables_unc --> climakitae/util/utils
+    climakitae/tools/batch --> climakitae/core/data_load
+    climakitae/tools/batch --> climakitae/util/utils
+    climakitae/tools/batch --> climakitae/util/utils
