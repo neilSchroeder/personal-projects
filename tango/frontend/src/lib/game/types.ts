@@ -16,15 +16,17 @@ export enum ConstraintType {
 }
 
 export interface GameState {
-  gameId: string;
+  gameId?: string;
   board: PieceType[][];
   hConstraints: ConstraintType[][];
   vConstraints: ConstraintType[][];
   lockedTiles: boolean[][];
   isComplete: boolean;
+  isValid: boolean;
+  difficulty: string;
   startTime: Date;
   completionTime?: Date;
-  movesCount: number;
+  moveCount: number;
 }
 
 export interface GameValidationResult {
@@ -37,6 +39,35 @@ export interface LeaderboardEntry {
   time: number;
   date: Date;
   formattedTime: string;
+}
+
+export interface GameResult {
+  score: number;
+  duration: number;
+  moves: number;
+  difficulty: string;
+  completed: boolean;
+}
+
+export interface Hint {
+  type: 'constraint' | 'rule' | 'logical' | 'none';
+  message: string;
+  position?: {
+    row: number;
+    col: number;
+  };
+  suggestedPiece?: PieceType;
+  reasoning?: string;
+}
+
+export interface Stats {
+  gamesPlayed: number;
+  gamesWon: number;
+  averageScore: number;
+  bestScore: number;
+  averageTime: number;
+  bestTime: number;
+  difficultyStats: { [key: string]: any };
 }
 
 export interface HintResult {
@@ -56,6 +87,11 @@ export interface PuzzleConfig {
   startingPiecesMax: number;
   constraintProbability: number;
   maxAttempts: number;
+  baseScore: number;
+  parTime: number;
+  parMoves: number;
+  timeWeight: number;
+  moveWeight: number;
 }
 
 // Board size constant
@@ -110,3 +146,55 @@ export function createEmptyLockedTiles(): boolean[][] {
     Array(BOARD_SIZE).fill(false)
   );
 }
+
+// Puzzle configurations for different difficulty levels
+export const PUZZLE_CONFIGS: { [key: string]: PuzzleConfig } = {
+  easy: {
+    name: 'Easy',
+    startingPiecesMin: 8,
+    startingPiecesMax: 12,
+    constraintProbability: 0.3,
+    maxAttempts: 10,
+    baseScore: 100,
+    parTime: 300, // 5 minutes
+    parMoves: 30,
+    timeWeight: 2,
+    moveWeight: 3
+  },
+  standard: {
+    name: 'Standard',
+    startingPiecesMin: 6,
+    startingPiecesMax: 10,
+    constraintProbability: 0.25,
+    maxAttempts: 10,
+    baseScore: 200,
+    parTime: 240, // 4 minutes
+    parMoves: 25,
+    timeWeight: 3,
+    moveWeight: 4
+  },
+  challenging: {
+    name: 'Challenging',
+    startingPiecesMin: 4,
+    startingPiecesMax: 8,
+    constraintProbability: 0.2,
+    maxAttempts: 10,
+    baseScore: 300,
+    parTime: 180, // 3 minutes
+    parMoves: 20,
+    timeWeight: 4,
+    moveWeight: 5
+  },
+  expert: {
+    name: 'Expert',
+    startingPiecesMin: 2,
+    startingPiecesMax: 6,
+    constraintProbability: 0.15,
+    maxAttempts: 10,
+    baseScore: 500,
+    parTime: 120, // 2 minutes
+    parMoves: 15,
+    timeWeight: 5,
+    moveWeight: 6
+  }
+};
