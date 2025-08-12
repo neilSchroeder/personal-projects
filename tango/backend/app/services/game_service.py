@@ -297,19 +297,23 @@ class TangoBoardSolver:
         A constraint is redundant if removing it doesn't create additional valid solutions.
         """
         print("🔍 Analyzing constraints for redundancy...")
-        
+
         # Make copies to modify
         h_constraints_copy = [row[:] for row in h_constraints]
         v_constraints_copy = [row[:] for row in v_constraints]
-        
+
         # Count original constraints
-        original_h_count = sum(sum(1 for c in row if c != ConstraintType.NONE) for row in h_constraints)
-        original_v_count = sum(sum(1 for c in row if c != ConstraintType.NONE) for row in v_constraints)
+        original_h_count = sum(
+            sum(1 for c in row if c != ConstraintType.NONE) for row in h_constraints
+        )
+        original_v_count = sum(
+            sum(1 for c in row if c != ConstraintType.NONE) for row in v_constraints
+        )
         original_total = original_h_count + original_v_count
-        
+
         # Test each constraint to see if it's necessary
         removed_constraints = 0
-        
+
         # Test horizontal constraints
         for row in range(self.size):
             for col in range(self.size - 1):
@@ -317,19 +321,23 @@ class TangoBoardSolver:
                     # Temporarily remove this constraint
                     original_constraint = h_constraints_copy[row][col]
                     h_constraints_copy[row][col] = ConstraintType.NONE
-                    
+
                     # Check if puzzle still has unique solution
-                    test_solver = TangoBoardSolver(board, h_constraints_copy, v_constraints_copy, locked_tiles)
+                    test_solver = TangoBoardSolver(
+                        board, h_constraints_copy, v_constraints_copy, locked_tiles
+                    )
                     solutions = test_solver.find_all_solutions(max_solutions=3)
-                    
+
                     if len(solutions) == 1:
                         # Constraint is redundant, keep it removed
                         removed_constraints += 1
-                        print(f"   ➖ Removed redundant horizontal constraint at ({row}, {col})")
+                        print(
+                            f"   ➖ Removed redundant horizontal constraint at ({row}, {col})"
+                        )
                     else:
                         # Constraint is necessary, restore it
                         h_constraints_copy[row][col] = original_constraint
-        
+
         # Test vertical constraints
         for row in range(self.size - 1):
             for col in range(self.size):
@@ -337,26 +345,38 @@ class TangoBoardSolver:
                     # Temporarily remove this constraint
                     original_constraint = v_constraints_copy[row][col]
                     v_constraints_copy[row][col] = ConstraintType.NONE
-                    
+
                     # Check if puzzle still has unique solution
-                    test_solver = TangoBoardSolver(board, h_constraints_copy, v_constraints_copy, locked_tiles)
+                    test_solver = TangoBoardSolver(
+                        board, h_constraints_copy, v_constraints_copy, locked_tiles
+                    )
                     solutions = test_solver.find_all_solutions(max_solutions=3)
-                    
+
                     if len(solutions) == 1:
                         # Constraint is redundant, keep it removed
                         removed_constraints += 1
-                        print(f"   ➖ Removed redundant vertical constraint at ({row}, {col})")
+                        print(
+                            f"   ➖ Removed redundant vertical constraint at ({row}, {col})"
+                        )
                     else:
                         # Constraint is necessary, restore it
                         v_constraints_copy[row][col] = original_constraint
-        
+
         # Report reduction
-        final_h_count = sum(sum(1 for c in row if c != ConstraintType.NONE) for row in h_constraints_copy)
-        final_v_count = sum(sum(1 for c in row if c != ConstraintType.NONE) for row in v_constraints_copy)
+        final_h_count = sum(
+            sum(1 for c in row if c != ConstraintType.NONE)
+            for row in h_constraints_copy
+        )
+        final_v_count = sum(
+            sum(1 for c in row if c != ConstraintType.NONE)
+            for row in v_constraints_copy
+        )
         final_total = final_h_count + final_v_count
-        
-        print(f"📉 Reduced constraints from {original_total} to {final_total} ({removed_constraints} removed)")
-        
+
+        print(
+            f"📉 Reduced constraints from {original_total} to {final_total} ({removed_constraints} removed)"
+        )
+
         return h_constraints_copy, v_constraints_copy
 
     def optimize_constraints_for_inference(
@@ -372,24 +392,26 @@ class TangoBoardSolver:
         nearby constraints that become redundant.
         """
         print("🧠 Optimizing constraints for inference-based solving...")
-        
+
         # Create a test board with current locked pieces
-        test_board = [[PieceType.EMPTY for _ in range(self.size)] for _ in range(self.size)]
+        test_board = [
+            [PieceType.EMPTY for _ in range(self.size)] for _ in range(self.size)
+        ]
         for row in range(self.size):
             for col in range(self.size):
                 if locked_tiles[row][col]:
                     test_board[row][col] = board[row][col]
-        
+
         # Find positions that can be solved through inference
         inference_positions = self._find_inference_solvable_positions(test_board)
         print(f"   🎯 Found {len(inference_positions)} positions solvable by inference")
-        
+
         # Remove constraints near inference-solvable positions
         h_constraints_copy = [row[:] for row in h_constraints]
         v_constraints_copy = [row[:] for row in v_constraints]
-        
+
         removed_near_inference = 0
-        
+
         for row, col in inference_positions:
             # Remove nearby horizontal constraints
             for check_col in [col - 1, col]:
@@ -398,16 +420,20 @@ class TangoBoardSolver:
                         # Test if removing this constraint maintains uniqueness
                         original = h_constraints_copy[row][check_col]
                         h_constraints_copy[row][check_col] = ConstraintType.NONE
-                        
-                        test_solver = TangoBoardSolver(board, h_constraints_copy, v_constraints_copy, locked_tiles)
+
+                        test_solver = TangoBoardSolver(
+                            board, h_constraints_copy, v_constraints_copy, locked_tiles
+                        )
                         solutions = test_solver.find_all_solutions(max_solutions=3)
-                        
+
                         if len(solutions) == 1:
                             removed_near_inference += 1
-                            print(f"   ➖ Removed constraint near inference position ({row}, {col})")
+                            print(
+                                f"   ➖ Removed constraint near inference position ({row}, {col})"
+                            )
                         else:
                             h_constraints_copy[row][check_col] = original
-            
+
             # Remove nearby vertical constraints
             for check_row in [row - 1, row]:
                 if 0 <= check_row < self.size - 1:
@@ -415,66 +441,78 @@ class TangoBoardSolver:
                         # Test if removing this constraint maintains uniqueness
                         original = v_constraints_copy[check_row][col]
                         v_constraints_copy[check_row][col] = ConstraintType.NONE
-                        
-                        test_solver = TangoBoardSolver(board, h_constraints_copy, v_constraints_copy, locked_tiles)
+
+                        test_solver = TangoBoardSolver(
+                            board, h_constraints_copy, v_constraints_copy, locked_tiles
+                        )
                         solutions = test_solver.find_all_solutions(max_solutions=3)
-                        
+
                         if len(solutions) == 1:
                             removed_near_inference += 1
-                            print(f"   ➖ Removed constraint near inference position ({row}, {col})")
+                            print(
+                                f"   ➖ Removed constraint near inference position ({row}, {col})"
+                            )
                         else:
                             v_constraints_copy[check_row][col] = original
-        
-        print(f"   📉 Removed {removed_near_inference} constraints near inference-solvable positions")
-        
+
+        print(
+            f"   📉 Removed {removed_near_inference} constraints near inference-solvable positions"
+        )
+
         return h_constraints_copy, v_constraints_copy
 
-    def _find_inference_solvable_positions(self, board: list[list[PieceType]]) -> list[tuple[int, int]]:
+    def _find_inference_solvable_positions(
+        self, board: list[list[PieceType]]
+    ) -> list[tuple[int, int]]:
         """
         Find positions that can be determined through logical inference from game rules alone.
         """
         inference_positions = []
-        
+
         # Simulate incremental solving to find inference-based moves
         working_board = [row[:] for row in board]
-        
+
         max_iterations = 36  # Maximum number of empty cells
         for _ in range(max_iterations):
             found_move = False
-            
+
             for row in range(self.size):
                 for col in range(self.size):
                     if working_board[row][col] == PieceType.EMPTY:
                         # Check what pieces are possible based on game rules only
                         possible_pieces = []
-                        
+
                         for piece in [PieceType.SUN, PieceType.MOON]:
                             working_board[row][col] = piece
-                            if self._is_valid_by_game_rules_only(working_board, row, col):
+                            if self._is_valid_by_game_rules_only(
+                                working_board, row, col
+                            ):
                                 possible_pieces.append(piece)
                             working_board[row][col] = PieceType.EMPTY
-                        
+
                         # If only one piece is possible by game rules, it's inference-solvable
                         if len(possible_pieces) == 1:
                             working_board[row][col] = possible_pieces[0]
                             inference_positions.append((row, col))
                             found_move = True
                             break
-                
+
                 if found_move:
                     break
-            
+
             if not found_move:
                 break
-        
+
         return inference_positions
 
-    def _is_valid_by_game_rules_only(self, board: list[list[PieceType]], row: int, col: int) -> bool:
+    def _is_valid_by_game_rules_only(
+        self, board: list[list[PieceType]], row: int, col: int
+    ) -> bool:
         """
         Check if a piece placement is valid based on game rules only (no explicit constraints).
         """
         piece = board[row][col]
-        
+
         # Rule 1: No more than 2 consecutive pieces
         # Check horizontal
         if col >= 2:
@@ -486,7 +524,7 @@ class TangoBoardSolver:
         if col < self.size - 2:
             if piece == board[row][col + 1] == board[row][col + 2] != PieceType.EMPTY:
                 return False
-        
+
         # Check vertical
         if row >= 2:
             if board[row - 1][col] == board[row - 2][col] == piece != PieceType.EMPTY:
@@ -497,18 +535,18 @@ class TangoBoardSolver:
         if row < self.size - 2:
             if piece == board[row + 1][col] == board[row + 2][col] != PieceType.EMPTY:
                 return False
-        
+
         # Rule 2: Check balance constraints (3 of each piece per row/column)
         row_suns = sum(1 for c in range(self.size) if board[row][c] == PieceType.SUN)
         row_moons = sum(1 for c in range(self.size) if board[row][c] == PieceType.MOON)
         col_suns = sum(1 for r in range(self.size) if board[r][col] == PieceType.SUN)
         col_moons = sum(1 for r in range(self.size) if board[r][col] == PieceType.MOON)
-        
+
         if piece == PieceType.SUN and (row_suns > 3 or col_suns > 3):
             return False
         if piece == PieceType.MOON and (row_moons > 3 or col_moons > 3):
             return False
-        
+
         return True
 
     def add_disambiguating_constraints(
@@ -645,17 +683,20 @@ class TangoBoardSolver:
             # Prioritize moves based on educational value (game rules > constraints)
             educational_moves = []
             constraint_moves = []
-            
+
             for move in logical_moves:
-                if "Rule-based deduction" in move["reasoning"] or "Balance rule deduction" in move["reasoning"]:
+                if (
+                    "Rule-based deduction" in move["reasoning"]
+                    or "Balance rule deduction" in move["reasoning"]
+                ):
                     educational_moves.append(move)
                 else:
                     constraint_moves.append(move)
-            
+
             # Return the best educational move first, then constraint-based moves
             best_moves = educational_moves if educational_moves else constraint_moves
             move = max(best_moves, key=lambda x: x["confidence"])
-            
+
             return {
                 "found": True,
                 "row": move["row"],
@@ -664,7 +705,9 @@ class TangoBoardSolver:
                 "reasoning": move["reasoning"],
                 "confidence": move["confidence"],
                 "hint_type": "logical_deduction",
-                "educational_value": "high" if "Rule-based" in move["reasoning"] else "medium",
+                "educational_value": (
+                    "high" if "Rule-based" in move["reasoning"] else "medium"
+                ),
             }
 
         # If no logical moves, provide educational guidance about the board state
@@ -709,18 +752,30 @@ class TangoBoardSolver:
         # Count pieces in each row and column
         row_counts = []
         col_counts = []
-        
+
         for i in range(self.size):
             row_suns = sum(1 for c in range(self.size) if board[i][c] == PieceType.SUN)
-            row_moons = sum(1 for c in range(self.size) if board[i][c] == PieceType.MOON)
-            row_empty = sum(1 for c in range(self.size) if board[i][c] == PieceType.EMPTY)
-            row_counts.append({"suns": row_suns, "moons": row_moons, "empty": row_empty})
-            
+            row_moons = sum(
+                1 for c in range(self.size) if board[i][c] == PieceType.MOON
+            )
+            row_empty = sum(
+                1 for c in range(self.size) if board[i][c] == PieceType.EMPTY
+            )
+            row_counts.append(
+                {"suns": row_suns, "moons": row_moons, "empty": row_empty}
+            )
+
             col_suns = sum(1 for r in range(self.size) if board[r][i] == PieceType.SUN)
-            col_moons = sum(1 for r in range(self.size) if board[r][i] == PieceType.MOON)
-            col_empty = sum(1 for r in range(self.size) if board[r][i] == PieceType.EMPTY)
-            col_counts.append({"suns": col_suns, "moons": col_moons, "empty": col_empty})
-        
+            col_moons = sum(
+                1 for r in range(self.size) if board[r][i] == PieceType.MOON
+            )
+            col_empty = sum(
+                1 for r in range(self.size) if board[r][i] == PieceType.EMPTY
+            )
+            col_counts.append(
+                {"suns": col_suns, "moons": col_moons, "empty": col_empty}
+            )
+
         # Look for rows/columns that are close to their limits
         for row in range(self.size):
             if row_counts[row]["empty"] > 0:
@@ -747,7 +802,7 @@ class TangoBoardSolver:
                                 "reasoning": f"Strategic insight: Row {row + 1} already has 2 moons. Focus on sun placements in this row to maintain balance.",
                                 "confidence": 70,
                             }
-        
+
         # Look for columns with similar patterns
         for col in range(self.size):
             if col_counts[col]["empty"] > 0:
@@ -773,12 +828,20 @@ class TangoBoardSolver:
                                 "reasoning": f"Strategic insight: Column {col + 1} already has 2 moons. Focus on sun placements in this column to maintain balance.",
                                 "confidence": 70,
                             }
-        
+
         # Look for potential consecutive violations
         for row in range(self.size):
             for col in range(self.size - 2):
-                if board[row][col] != PieceType.EMPTY and board[row][col] == board[row][col + 1] and board[row][col + 2] == PieceType.EMPTY:
-                    other_piece = PieceType.MOON if board[row][col] == PieceType.SUN else PieceType.SUN
+                if (
+                    board[row][col] != PieceType.EMPTY
+                    and board[row][col] == board[row][col + 1]
+                    and board[row][col + 2] == PieceType.EMPTY
+                ):
+                    other_piece = (
+                        PieceType.MOON
+                        if board[row][col] == PieceType.SUN
+                        else PieceType.SUN
+                    )
                     return {
                         "has_opportunities": True,
                         "suggested_row": row,
@@ -787,7 +850,7 @@ class TangoBoardSolver:
                         "reasoning": f"Strategic insight: Placing {other_piece.value} at ({row + 1}, {col + 3}) prevents three consecutive {board[row][col].value}s.",
                         "confidence": 85,
                     }
-        
+
         return {"has_opportunities": False}
 
     def _find_logical_moves(self, board: list[list[PieceType]]) -> list[dict]:
@@ -885,14 +948,22 @@ class TangoBoardSolver:
 
         if other_piece == PieceType.SUN:
             if row_suns >= 3:
-                reasons.append(f"row {row + 1} already has {row_suns} suns (max 3 per row)")
+                reasons.append(
+                    f"row {row + 1} already has {row_suns} suns (max 3 per row)"
+                )
             if col_suns >= 3:
-                reasons.append(f"column {col + 1} already has {col_suns} suns (max 3 per column)")
+                reasons.append(
+                    f"column {col + 1} already has {col_suns} suns (max 3 per column)"
+                )
         elif other_piece == PieceType.MOON:
             if row_moons >= 3:
-                reasons.append(f"row {row + 1} already has {row_moons} moons (max 3 per row)")
+                reasons.append(
+                    f"row {row + 1} already has {row_moons} moons (max 3 per row)"
+                )
             if col_moons >= 3:
-                reasons.append(f"column {col + 1} already has {col_moons} moons (max 3 per column)")
+                reasons.append(
+                    f"column {col + 1} already has {col_moons} moons (max 3 per column)"
+                )
 
         # Check constraint violations (only mention if no game rule violations found)
         if not reasons:
@@ -914,7 +985,10 @@ class TangoBoardSolver:
                             f"constraint requires this cell to differ from {left_piece.value} on the left"
                         )
 
-            if col < self.size - 1 and self.h_constraints[row][col] != ConstraintType.NONE:
+            if (
+                col < self.size - 1
+                and self.h_constraints[row][col] != ConstraintType.NONE
+            ):
                 right_piece = board[row][col + 1]
                 if right_piece != PieceType.EMPTY:
                     if (
@@ -950,7 +1024,10 @@ class TangoBoardSolver:
                             f"constraint requires this cell to differ from {top_piece.value} above"
                         )
 
-            if row < self.size - 1 and self.v_constraints[row][col] != ConstraintType.NONE:
+            if (
+                row < self.size - 1
+                and self.v_constraints[row][col] != ConstraintType.NONE
+            ):
                 bottom_piece = board[row + 1][col]
                 if bottom_piece != PieceType.EMPTY:
                     if (
@@ -974,7 +1051,7 @@ class TangoBoardSolver:
             rule_reasons = [r for r in reasons if "game rule violation" in r]
             constraint_reasons = [r for r in reasons if "constraint" in r]
             balance_reasons = [r for r in reasons if "max 3" in r or "already has" in r]
-            
+
             # Prioritize game rule explanations over constraint explanations
             if rule_reasons:
                 primary_reason = rule_reasons[0]
@@ -983,9 +1060,11 @@ class TangoBoardSolver:
                 primary_reason = balance_reasons[0]
                 explanation_type = "Balance rule deduction"
             else:
-                primary_reason = constraint_reasons[0] if constraint_reasons else reasons[0]
+                primary_reason = (
+                    constraint_reasons[0] if constraint_reasons else reasons[0]
+                )
                 explanation_type = "Constraint-based deduction"
-            
+
             return f"{explanation_type}: Only {piece.value} works here because {primary_reason}"
         else:
             return f"Logical deduction: Only {piece.value} is valid at position ({row + 1}, {col + 1})"
@@ -1517,10 +1596,10 @@ class GameService:
 
         # First, find positions that would be difficult to solve through inference alone
         difficult_positions = self._find_difficult_inference_positions(board)
-        
+
         # Add constraints with strategic value, prioritizing difficult positions
         constraint_positions = []
-        
+
         # Reduced constraint probability - let game rules do more work
         base_probability = config.constraint_probability * 0.3  # Reduce by 70%
 
@@ -1528,13 +1607,17 @@ class GameService:
         for row in range(6):
             for col in range(5):
                 is_difficult_area = any(
-                    abs(diff_row - row) <= 1 and abs(diff_col - col) <= 1 
+                    abs(diff_row - row) <= 1 and abs(diff_col - col) <= 1
                     for diff_row, diff_col in difficult_positions
                 )
-                
+
                 # Higher probability for difficult areas, lower for easy areas
-                probability = base_probability * 3 if is_difficult_area else base_probability * 0.5
-                
+                probability = (
+                    base_probability * 3
+                    if is_difficult_area
+                    else base_probability * 0.5
+                )
+
                 if random.random() < probability:
                     if board[row][col] == board[row][col + 1]:
                         h_constraints[row][col] = ConstraintType.SAME
@@ -1547,13 +1630,17 @@ class GameService:
         for row in range(5):
             for col in range(6):
                 is_difficult_area = any(
-                    abs(diff_row - row) <= 1 and abs(diff_col - col) <= 1 
+                    abs(diff_row - row) <= 1 and abs(diff_col - col) <= 1
                     for diff_row, diff_col in difficult_positions
                 )
-                
+
                 # Higher probability for difficult areas, lower for easy areas
-                probability = base_probability * 3 if is_difficult_area else base_probability * 0.5
-                
+                probability = (
+                    base_probability * 3
+                    if is_difficult_area
+                    else base_probability * 0.5
+                )
+
                 if random.random() < probability:
                     if board[row][col] == board[row + 1][col]:
                         v_constraints[row][col] = ConstraintType.SAME
@@ -1562,53 +1649,61 @@ class GameService:
                         v_constraints[row][col] = ConstraintType.DIFFERENT
                         constraint_positions.append(("v", row, col))
 
-        print(f"Added {len(constraint_positions)} strategic constraints ({len(difficult_positions)} difficult positions identified)")
+        print(
+            f"Added {len(constraint_positions)} strategic constraints ({len(difficult_positions)} difficult positions identified)"
+        )
         return h_constraints, v_constraints
 
-    def _find_difficult_inference_positions(self, board: list[list[PieceType]]) -> list[tuple[int, int]]:
+    def _find_difficult_inference_positions(
+        self, board: list[list[PieceType]]
+    ) -> list[tuple[int, int]]:
         """
         Find positions that would be particularly difficult to solve through game rule inference alone.
         These are positions where multiple valid pieces could be placed based on local context.
         """
         difficult_positions = []
-        
+
         # Create a test scenario with fewer locked pieces to simulate mid-game state
         test_locked = [[False for _ in range(6)] for _ in range(6)]
-        
+
         # Lock a minimal set of pieces (corners and some strategic positions)
         strategic_locks = [(0, 0), (0, 5), (5, 0), (5, 5), (2, 2), (3, 3)]
         for row, col in strategic_locks:
             test_locked[row][col] = True
-        
+
         # Test solver to find positions with multiple valid options
-        test_solver = TangoBoardSolver(board, 
-                                     [[ConstraintType.NONE for _ in range(5)] for _ in range(6)],
-                                     [[ConstraintType.NONE for _ in range(6)] for _ in range(5)],
-                                     test_locked)
-        
+        test_solver = TangoBoardSolver(
+            board,
+            [[ConstraintType.NONE for _ in range(5)] for _ in range(6)],
+            [[ConstraintType.NONE for _ in range(6)] for _ in range(5)],
+            test_locked,
+        )
+
         # Create test board with only locked pieces
         test_board = [[PieceType.EMPTY for _ in range(6)] for _ in range(6)]
         for row in range(6):
             for col in range(6):
                 if test_locked[row][col]:
                     test_board[row][col] = board[row][col]
-        
+
         # Check each empty position for ambiguity
         for row in range(6):
             for col in range(6):
                 if not test_locked[row][col]:
                     valid_pieces = []
-                    
+
                     for piece in [PieceType.SUN, PieceType.MOON]:
                         test_board[row][col] = piece
-                        if test_solver._is_valid_by_game_rules_only(test_board, row, col):
+                        if test_solver._is_valid_by_game_rules_only(
+                            test_board, row, col
+                        ):
                             valid_pieces.append(piece)
                         test_board[row][col] = PieceType.EMPTY
-                    
+
                     # If both pieces are valid, this position might be difficult
                     if len(valid_pieces) == 2:
                         difficult_positions.append((row, col))
-        
+
         return difficult_positions
 
     def _ensure_unique_solution(
@@ -1656,7 +1751,7 @@ class GameService:
             h_constraints, v_constraints = solver.remove_redundant_constraints(
                 board, h_constraints, v_constraints, locked_tiles
             )
-            
+
             # Optimize for inference-based solving
             h_constraints, v_constraints = solver.optimize_constraints_for_inference(
                 board, h_constraints, v_constraints, locked_tiles
