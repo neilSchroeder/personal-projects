@@ -57,7 +57,7 @@ CONSTRAINT_PROBABILITY = 0.25  # Probability of placing a constraint (0.0-1.0)
 CONSTRAINT_PROBABILITY_FALLBACK = 0.3  # Fallback probability for main generator
 
 # Piece removal probabilities for puzzle generation
-REMOVAL_PROB_WITH_CONSTRAINTS = 0.6  # Probability to remove piece that has constraints
+REMOVAL_PROB_WITH_CONSTRAINTS = 0.9  # Probability to remove piece that has constraints
 REMOVAL_PROB_WITHOUT_CONSTRAINTS = (
     0.9  # Probability to remove piece without constraints
 )
