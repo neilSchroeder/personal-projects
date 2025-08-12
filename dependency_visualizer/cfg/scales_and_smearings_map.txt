@@ -1,0 +1,222 @@
+graph TD
+    dependency_mapper["dependency_mapper"]
+    pymin["pymin"]
+    data_loader_check["data_loader_check"]
+    pyval["pyval"]
+    run_events["run_events"]
+    categories_plot["categories_plot"]
+    run_tests["run_tests"]
+    plot_example_loss_function["plot_example_loss_function"]
+    python["python"]
+    python/utilities["python.utilities"]
+    python -.-> python/utilities
+    python/utilities/write_files["python.utilities.write_files"]
+    python/utilities -.-> python/utilities/write_files
+    python/utilities/smear_mc["python.utilities.smear_mc"]
+    python/utilities -.-> python/utilities/smear_mc
+    python/utilities/evaluate_systematics["python.utilities.evaluate_systematics"]
+    python/utilities -.-> python/utilities/evaluate_systematics
+    python/utilities/data_loader["python.utilities.data_loader"]
+    python/utilities -.-> python/utilities/data_loader
+    python/utilities/minimizer["python.utilities.minimizer"]
+    python/utilities -.-> python/utilities/minimizer
+    python/utilities/scale_data["python.utilities.scale_data"]
+    python/utilities -.-> python/utilities/scale_data
+    python/utilities/reweight_pt_y["python.utilities.reweight_pt_y"]
+    python/utilities -.-> python/utilities/reweight_pt_y
+    python/utilities/pruner["python.utilities.pruner"]
+    python/utilities -.-> python/utilities/pruner
+    python/utilities/numba_hist["python.utilities.numba_hist"]
+    python/utilities -.-> python/utilities/numba_hist
+    python/utilities/divide_by_run["python.utilities.divide_by_run"]
+    python/utilities -.-> python/utilities/divide_by_run
+    python/utilities/time_stability["python.utilities.time_stability"]
+    python/utilities -.-> python/utilities/time_stability
+    python/utilities/condor_handler["python.utilities.condor_handler"]
+    python/utilities -.-> python/utilities/condor_handler
+    python/tests["python.tests"]
+    python -.-> python/tests
+    python/tests/test_plot_run_stability["python.tests.test_plot_run_stability"]
+    python/tests -.-> python/tests/test_plot_run_stability
+    python/tests/test_helper_pymin_functions["python.tests.test_helper_pymin_functions"]
+    python/tests -.-> python/tests/test_helper_pymin_functions
+    python/tests/test_write_smearings["python.tests.test_write_smearings"]
+    python/tests -.-> python/tests/test_write_smearings
+    python/tests/test_ss_config["python.tests.test_ss_config"]
+    python/tests -.-> python/tests/test_ss_config
+    python/plotters["python.plotters"]
+    python -.-> python/plotters
+    python/plotters/make_plots["python.plotters.make_plots"]
+    python/plotters -.-> python/plotters/make_plots
+    python/plotters/fit_bw_cb["python.plotters.fit_bw_cb"]
+    python/plotters -.-> python/plotters/fit_bw_cb
+    python/plotters/plots["python.plotters.plots"]
+    python/plotters -.-> python/plotters/plots
+    python/plotters/plot_cats["python.plotters.plot_cats"]
+    python/plotters -.-> python/plotters/plot_cats
+    python/plotters/plot_run_stability["python.plotters.plot_run_stability"]
+    python/plotters -.-> python/plotters/plot_run_stability
+    python/plotters/plot_styles["python.plotters.plot_styles"]
+    python/plotters -.-> python/plotters/plot_styles
+    python/plotters/plot_styles/mc_validation_style["python.plotters.plot_styles.mc_validation_style"]
+    python/plotters/plot_styles -.-> python/plotters/plot_styles/mc_validation_style
+    python/plotters/plot_styles/plot_style["python.plotters.plot_styles.plot_style"]
+    python/plotters/plot_styles -.-> python/plotters/plot_styles/plot_style
+    python/plotters/plot_styles/paper_style["python.plotters.plot_styles.paper_style"]
+    python/plotters/plot_styles -.-> python/plotters/plot_styles/paper_style
+    python/plotters/plot_styles/bw_cb_fit_style["python.plotters.plot_styles.bw_cb_fit_style"]
+    python/plotters/plot_styles -.-> python/plotters/plot_styles/bw_cb_fit_style
+    python/classes["python.classes"]
+    python -.-> python/classes
+    python/classes/breit_wigner["python.classes.breit_wigner"]
+    python/classes -.-> python/classes/breit_wigner
+    python/classes/constant_classes["python.classes.constant_classes"]
+    python/classes -.-> python/classes/constant_classes
+    python/classes/config_class["python.classes.config_class"]
+    python/classes -.-> python/classes/config_class
+    python/classes/zcat_class["python.classes.zcat_class"]
+    python/classes -.-> python/classes/zcat_class
+    python/classes/crystal_ball["python.classes.crystal_ball"]
+    python/classes -.-> python/classes/crystal_ball
+    python/tools["python.tools"]
+    python -.-> python/tools
+    python/tools/combine_onlysteps["python.tools.combine_onlysteps"]
+    python/tools -.-> python/tools/combine_onlysteps
+    python/tools/extract_scales["python.tools.extract_scales"]
+    python/tools -.-> python/tools/extract_scales
+    python/tools/addMCRunsToScale_newFormat["python.tools.addMCRunsToScale_newFormat"]
+    python/tools -.-> python/tools/addMCRunsToScale_newFormat
+    python/tools/add_uncertainties["python.tools.add_uncertainties"]
+    python/tools -.-> python/tools/add_uncertainties
+    python/tools/scales_validator["python.tools.scales_validator"]
+    python/tools -.-> python/tools/scales_validator
+    python/helpers["python.helpers"]
+    python -.-> python/helpers
+    python/helpers/helper_plots["python.helpers.helper_plots"]
+    python/helpers -.-> python/helpers/helper_plots
+    python/helpers/helper_minimizer["python.helpers.helper_minimizer"]
+    python/helpers -.-> python/helpers/helper_minimizer
+    python/helpers/helper_pymin["python.helpers.helper_pymin"]
+    python/helpers -.-> python/helpers/helper_pymin
+    python/helpers/helper_pyval["python.helpers.helper_pyval"]
+    python/helpers -.-> python/helpers/helper_pyval
+    pymin --> python/helpers/helper_pymin
+    pymin --> python/plotters/plot_run_stability
+    pymin --> python/utilities/condor_handler
+    pymin --> python/utilities/divide_by_run
+    pymin --> python/utilities/scale_data
+    pymin --> python/utilities/minimizer
+    pymin --> python/utilities/pruner
+    pymin --> python/utilities/smear_mc
+    pymin --> python/classes/config_class
+    pymin --> python/utilities/reweight_pt_y
+    pymin --> python/utilities/time_stability
+    pymin --> python/utilities/write_files
+    data_loader_check --> python/tools
+    data_loader_check --> python/tools
+    pyval --> python/utilities/smear_mc
+    pyval --> python/utilities/scale_data
+    pyval --> python/utilities/data_loader
+    pyval --> python/helpers/helper_pyval
+    pyval --> python/utilities/reweight_pt_y
+    pyval --> python/plotters/make_plots
+    pyval --> python/utilities/evaluate_systematics
+    pyval --> python/classes/constant_classes
+    pyval --> python/classes/constant_classes
+    pyval --> python/classes/config_class
+    pyval --> python/helpers/helper_pyval
+    run_events --> python/tools
+    run_events --> python/plotters/plots
+    run_events --> python/tools
+    run_events --> python/plotters/plots
+    run_events --> python/tools
+    run_events --> python/tools
+    run_events --> python/classes/constant_classes
+    run_events --> python/plotters/plots
+    run_events --> python/tools
+    run_tests --> python/tests/test_helper_pymin_functions
+    run_tests --> python/tests/test_plot_run_stability
+    run_tests --> python/tests/test_write_smearings
+    run_tests --> python/tests/test_helper_pymin_functions
+    run_tests --> python/tests/test_ss_config
+    plot_example_loss_function --> python/tools
+    plot_example_loss_function --> python/tools
+    plot_example_loss_function --> python/tools
+    plot_example_loss_function --> python/classes/constant_classes
+    plot_example_loss_function --> python/tools
+    plot_example_loss_function --> python/tools
+    python/utilities/write_files --> python/classes/config_class
+    python/utilities/write_files --> python/classes/constant_classes
+    python/utilities/smear_mc --> python/classes/constant_classes
+    python/utilities/smear_mc --> python/classes/constant_classes
+    python/utilities/evaluate_systematics --> python/classes/config_class
+    python/utilities/evaluate_systematics --> python/plotters/fit_bw_cb
+    python/utilities/evaluate_systematics --> python/utilities/write_files
+    python/utilities/evaluate_systematics --> python/classes/constant_classes
+    python/utilities/evaluate_systematics --> python/classes/constant_classes
+    python/utilities/evaluate_systematics --> python/utilities/data_loader
+    python/utilities/data_loader --> python/classes/constant_classes
+    python/utilities/data_loader --> python/classes/zcat_class
+    python/utilities/data_loader --> python/classes/constant_classes
+    python/utilities/minimizer --> python/helpers/helper_minimizer
+    python/utilities/minimizer --> python/plotters/plot_cats
+    python/utilities/minimizer --> python/classes/constant_classes
+    python/utilities/minimizer --> python/utilities/data_loader
+    python/utilities/scale_data --> python/classes/constant_classes
+    python/utilities/scale_data --> python/classes/constant_classes
+    python/utilities/reweight_pt_y --> python/classes/config_class
+    python/utilities/reweight_pt_y --> python/utilities/write_files
+    python/utilities/reweight_pt_y --> python/classes/constant_classes
+    python/utilities/pruner --> python/classes/constant_classes
+    python/utilities/time_stability --> python/classes/config_class
+    python/utilities/time_stability --> python/classes/constant_classes
+    python/utilities/condor_handler --> python/classes/config_class
+    python/tests/test_plot_run_stability --> python/plotters/plot_run_stability
+    python/tests/test_helper_pymin_functions --> python/helpers/helper_pymin
+    python/tests/test_helper_pymin_functions --> python/helpers/helper_pymin
+    python/tests/test_write_smearings --> python/utilities/write_files
+    python/tests/test_ss_config --> python/classes/config_class
+    python/plotters/make_plots --> python/plotters/plots
+    python/plotters/make_plots --> python/classes/config_class
+    python/plotters/make_plots --> python/plotters/plots
+    python/plotters/make_plots --> python/classes/constant_classes
+    python/plotters/make_plots --> python/classes/constant_classes
+    python/plotters/make_plots --> python/plotters/plots
+    python/plotters/make_plots --> python/classes/constant_classes
+    python/plotters/make_plots --> python/utilities/data_loader
+    python/plotters/fit_bw_cb --> python/classes/crystal_ball
+    python/plotters/fit_bw_cb --> python/classes/breit_wigner
+    python/plotters/plots --> python/classes/config_class
+    python/plotters/plots --> python/helpers/helper_plots
+    python/plotters/plots --> python/classes/constant_classes
+    python/plotters/plots --> python/plotters/fit_bw_cb
+    python/plotters/plot_cats --> python/classes/config_class
+    python/plotters/plot_cats --> python/classes/constant_classes
+    python/plotters/plot_cats --> python/classes/zcat_class
+    python/plotters/plot_cats --> python/classes/constant_classes
+    python/plotters/plot_run_stability --> python/classes/config_class
+    python/plotters/plot_styles/mc_validation_style --> python/classes/config_class
+    python/plotters/plot_styles/mc_validation_style --> python/helpers/helper_plots
+    python/plotters/plot_styles/mc_validation_style --> python/classes/constant_classes
+    python/plotters/plot_styles/mc_validation_style --> python/plotters/fit_bw_cb
+    python/plotters/plot_styles/paper_style --> python/plotters/plot_styles/plot_style
+    python/plotters/plot_styles/paper_style --> python/plotters/plot_styles/plot_style
+    python/plotters/plot_styles/bw_cb_fit_style --> python/plotters/plot_styles/plot_style
+    python/plotters/plot_styles/bw_cb_fit_style --> python/plotters/plot_styles/plot_style
+    python/classes/constant_classes --> python/plotters/plot_styles/bw_cb_fit_style
+    python/classes/constant_classes --> python/plotters/plot_styles/paper_style
+    python/classes/zcat_class --> python/utilities/numba_hist
+    python/classes/zcat_class --> python/classes/constant_classes
+    python/tools/extract_scales --> python/utilities/write_files
+    python/helpers/helper_plots --> python/classes/constant_classes
+    python/helpers/helper_minimizer --> python/classes/constant_classes
+    python/helpers/helper_minimizer --> python/classes/zcat_class
+    python/helpers/helper_minimizer --> python/classes/constant_classes
+    python/helpers/helper_minimizer --> python/utilities/data_loader
+    python/helpers/helper_pymin --> python/classes/config_class
+    python/helpers/helper_pymin --> python/utilities/data_loader
+    python/helpers/helper_pymin --> python/classes/constant_classes
+    python/helpers/helper_pymin --> python/utilities/write_files
+    python/helpers/helper_pyval --> python/classes/constant_classes
+    python/helpers/helper_pyval --> python/classes/constant_classes
+    python/helpers/helper_pyval --> python/classes/config_class
