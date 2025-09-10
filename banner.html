@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Banner - Climate Research & Software Engineering</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .banner-container {
+            width: 1584px;
+            height: 396px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .banner {
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(15, 23, 42, 0.8) 0%, 
+                    rgba(30, 41, 59, 0.8) 25%, 
+                    rgba(15, 118, 110, 0.7) 50%, 
+                    rgba(5, 150, 105, 0.7) 75%, 
+                    rgba(16, 185, 129, 0.8) 100%),
+                url('./climate_map.png');
+            background-size: 100% auto;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated background elements */
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #22d3ee, transparent);
+            opacity: 0.6;
+            animation: dataFlow 4s linear infinite;
+        }
+        
+        .data-stream:nth-child(1) { left: 10%; height: 60px; animation-delay: 0s; }
+        .data-stream:nth-child(2) { left: 25%; height: 40px; animation-delay: 1s; }
+        .data-stream:nth-child(3) { left: 40%; height: 80px; animation-delay: 2s; }
+        .data-stream:nth-child(4) { left: 65%; height: 50px; animation-delay: 0.5s; }
+        .data-stream:nth-child(5) { left: 80%; height: 70px; animation-delay: 1.5s; }
+        
+        @keyframes dataFlow {
+            0% { transform: translateY(-100px); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(500px); opacity: 0; }
+        }
+        
+        /* Climate visualization elements */
+        .climate-viz {
+            position: absolute;
+            right: 100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 250px;
+        }
+        
+        .temperature-graph {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 110%;
+            height: 100px;
+            background: rgba(239, 68, 68, 0.2);
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+        }
+        
+        .temp-line {
+            position: absolute;
+            bottom: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #fbbf24, #ef4444);
+            width: 100%;
+            animation: tempRise 10s ease-in-out infinite alternate;
+        }
+        
+        @keyframes tempRise {
+            0% { transform: scaleY(0.5) translateY(20px); }
+            100% { transform: scaleY(1.5) translateY(0); }
+        }
+        
+        .co2-particles {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fbbf24;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .co2-particles:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .co2-particles:nth-child(2) { top: 40%; left: 30%; animation-delay: 2s; }
+        .co2-particles:nth-child(3) { top: 60%; left: 60%; animation-delay: 4s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        /* Code elements */
+        .code-overlay {
+            position: absolute;
+            right: 80px;
+            top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #22d3ee;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            width: 300px;
+        }
+        
+        .typing-animation {
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Syntax highlighting styles */
+        .keyword {
+            color: #a855f7; /* Purple for keywords */
+        }
+        
+        .function {
+            color: #ea580c; /* Burnt orange for functions */
+        }
+        
+        .parentheses {
+            color: #eab308; /* Yellow for parentheses */
+        }
+        
+        .variable {
+            color: #22d3ee; /* Cyan for variables */
+        }
+        
+        /* Fixed typing animation with proper cursor movement */
+        .typing-line {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0;
+            position: relative;
+        }
+        
+        .typing-line::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 1.4em;
+            background: #22d3ee;
+            right: 0;
+            top: 0;
+        }
+        
+        /* Line 1: Types from 5% to 20% */
+        .typing-line:nth-child(1) {
+            width: 0;
+            animation: typeLine1 14s linear infinite;
+        }
+        
+        .typing-line:nth-child(1)::after {
+            animation: cursor1 14s linear infinite;
+        }
+        
+        /* Line 2: Types from 25% to 45% */
+        .typing-line:nth-child(2) {
+            width: 0;
+            animation: typeLine2 14s linear infinite;
+        }
+        
+        .typing-line:nth-child(2)::after {
+            animation: cursor2 14s linear infinite;
+        }
+        
+        /* Line 3: Types from 50% to 70% */
+        .typing-line:nth-child(3) {
+            width: 0;
+            animation: typeLine3 14s linear infinite;
+        }
+        
+        .typing-line:nth-child(3)::after {
+            animation: cursor3 14s linear infinite;
+        }
+        
+        /* Line 1 animations */
+        @keyframes typeLine1 {
+            0% { width: 0; }
+            5% { width: 0; }
+            20% { width: 100%; }
+            75% { width: 100%; }
+            80% { width: 0; }
+            100% { width: 0; }
+        }
+        
+        @keyframes cursor1 {
+            0% { opacity: 0; }
+            5% { opacity: 1; }
+            20% { opacity: 1; }
+            21% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        
+        /* Line 2 animations */
+        @keyframes typeLine2 {
+            0% { width: 0; }
+            25% { width: 0; }
+            45% { width: 100%; }
+            75% { width: 100%; }
+            80% { width: 0; }
+            100% { width: 0; }
+        }
+        
+        @keyframes cursor2 {
+            0% { opacity: 0; }
+            25% { opacity: 1; }
+            45% { opacity: 1; }
+            46% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        
+        /* Line 3 animations */
+        @keyframes typeLine3 {
+            0% { width: 0; }
+            50% { width: 0; }
+            70% { width: 100%; }
+            75% { width: 100%; }
+            80% { width: 0; }
+            100% { width: 0; }
+        }
+        
+        @keyframes cursor3 {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            70% { opacity: 1; }
+            71% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        
+        /* Main text */
+        .main-text {
+            position: absolute;
+            right: 75px;
+            bottom: 80px;
+            color: white;
+            z-index: 10;
+            text-align: center;
+        }
+        
+        .main-text h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .main-text p {
+            font-size: 20px;
+            margin: 0;
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner-container">
+        <div class="banner">
+            <!-- Data streams -->
+            <div class="data-stream"></div>
+            <div class="data-stream"></div>
+            <div class="data-stream"></div>
+            <div class="data-stream"></div>
+            <div class="data-stream"></div>
+            
+            <!-- Climate visualization -->
+            <div class="climate-viz">
+                <div class="co2-particles"></div>
+                <div class="co2-particles"></div>
+                <div class="co2-particles"></div>
+                <div class="temperature-graph">
+                    <div class="temp-line"></div>
+                </div>
+            </div>
+            
+            <!-- Code overlay -->
+            <div class="code-overlay">
+                <div class="typing-animation">
+                    <p class="typing-line"><span class="text-content"><span class="keyword">def</span> <span class="function">access_climate_data</span><span class="parentheses">()</span>:</span></p>
+                    <p class="typing-line"><span class="text-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">catalog</span> = <span class="function">load_data_catalog</span><span class="parentheses">()</span></span></p>
+                    <p class="typing-line"><span class="text-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">catalog</span>.<span class="function">get_data</span><span class="parentheses">()</span></span></p>
+                </div>
+            </div>
+            
+            <!-- Main text -->
+            <div class="main-text">
+                <h1>Climate × Code</h1>
+                <p>Building software solutions for climate research</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
