@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+
+[node name="Root" type="VBoxContainer" parent="SafeArea"]
+
+[node name="WaveLabel" type="Label" parent="SafeArea/Root"]
+unique_name_in_owner = true
+text = "Wave: 0"
+
+[node name="EnergyLabel" type="Label" parent="SafeArea/Root"]
+unique_name_in_owner = true
+text = "Energy: 0"
+
+[node name="ScrapLabel" type="Label" parent="SafeArea/Root"]
+unique_name_in_owner = true
+text = "Scrap: 0"
+
+[node name="BaseHealthLabel" type="Label" parent="SafeArea/Root"]
+unique_name_in_owner = true
+text = "Base HP: 20"
+
+[node name="StatusLabel" type="Label" parent="SafeArea/Root"]
+unique_name_in_owner = true
+text = ""
