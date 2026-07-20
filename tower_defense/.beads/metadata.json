@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "tower_defense",
+  "project_id": "5274734b-7c34-4e64-a2f6-a9c0cf35ed62"
+}
