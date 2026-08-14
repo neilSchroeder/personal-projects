@@ -1,0 +1,230 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% reconstruction.tex:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Event reconstruction and selection}
+\label{chap:reco}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+This analysis aims to measure the mass of the Higgs boson as precisely as possible. For this, the diphoton invariant mass ($m_{\gamma\gamma}$) must be precisely reconstructed from the output of the CMS detector. The H$\rightarrow\gamma\gamma$ signal is narrowly peaked and sits on a smoothly falling background of diphoton events, primarily coming from $gg\rightarrow\gamma\gamma$. For events with two reconstructed photons, the invariant mass is defined to be
+
+\begin{equation}
+    m_{\gamma\gamma} = \sqrt{2 E_{1}^{\gamma} E_{2}^{\gamma}(1-\cos(\theta_{1,2}))}
+    \label{eqn:mgg}
+\end{equation}
+where $E_1^{\gamma}$ and $E_2^{\gamma}$ are the energies of the photons in the event, and $\theta_{1,2}$ is the opening angle between them. Several factors that determine the overall precision of the Higgs boson mass measurement are:
+\begin{enumerate}
+    \item \textit{Diphoton mass resolution ($\sigma_{\gamma\gamma}/m_{\gamma\gamma}$)}: the narrower the signal peak, the easier it is to isolate from the diphoton background. The dominant contributions to this aspect of the analysis come from precise energy calibration and event categorization. These topics are discussed in Chapters~\ref{chap:scales}, and ~\ref{chap:categorisation} respectively.
+    \item \textit{Systematic uncertainties on the diphoton invariant mass}: the more precisely the photon energies are known, the more precisely the diphoton invariant mass is known. However, a significant caveat is the uncertainty on the opening angle $\theta_{1,2}$. If the primary vertex - the point of origin for the diphoton event - can be determined to within 1 cm, then this uncertainty becomes insignificant, and the uncertainty on the diphoton invariant mass is dominated by the uncertainties associated with the photon energies, otherwise it contributes significantly to the uncertainty. Details on systematic uncertainties affecting the photon energies are described in Chapter~\ref{chap:stats}. 
+\end{enumerate}
+
+This chapter focuses on reconstructing physics objects, such as photons and electrons, using the particle flow algorithm~\cite{particle_flow} and the vertex and photon identification process used in H$\rightarrow\gamma\gamma$ analyses. 
+
+\section{Particle flow}
+
+Particle flow (PF) reconstruction~\cite{particle_flow} is an offline analysis technique that uses tracks or energy clusters from each CMS sub-detector to build physics objects. This process is referred to as ``reconstruction." The CMS detector uniquely benefits from the PF approach due to its highly granular subdetectors and its high magnetic field. The high granularity leads to detailed clustering algorithms in the ECAL and the HCAL, while the magnetic field allows charged particles to be tracked as they bend. The PF reconstruction process uses the information from all subdetectors to determine the optimal classification of objects in the detector.
+
+The reconstruction process begins at the interior of the detector and works outward. Interactions with the pixel tracker are grouped into tracks by an algorithm based on Kalman Filtering~\cite{track_reco}. This process uses an iterative approach to reduce the computational complexity by removing tracks easily paired with energy deposits. The first iteration picks out tracks with at least three pixel hits; this makes up the majority of reconstructed tracks. The second iteration picks out tracks that have only two pixel hits. The third iteration finds prompt tracks with $p_T$ < 0.8 GeV. Iterations four through six attempt to identify tracks originating outside the beam spot and recover any tracks not found in the previous iterations. The muon system's tracking procedure functions similarly.
+
+The calorimeters (ECAL and HCAL) use clustering algorithms to group energy deposits from a particle shower. The process for the ECAL is described here due to its importance in the H$\rightarrow\gamma\gamma$ analysis; the HCAL uses a similar procedure. The clustering algorithm starts by selecting \textit{seed crystals} that have an energy above a prescribed threshold and have the highest local energy deposition, i.e., the energy deposited in the seed crystal is higher than the energy of any surrounding crystals. From these seed crystals, topological clusters are built by adding neighboring (by edge or corner) energy deposits to the cluster. Crystals belonging to more than one topological cluster share the energy between the allowed clusters, assuming Gaussian shower distributions. Once the topological clusters are built, they are further grouped into superclusters (SCs). This additional grouping accounts for energy losses due to bremsstrahlung since the electromagnetic showers have similar $\eta$ values but tend to spread in $\phi$ because of their interaction with the magnetic field.
+
+The PF algorithm uses the tracks and energy clusters described above to build collections of candidates for five types of particles: muons, electrons, photons, neutral hadrons, and charged hadrons. The detector features used to construct these objects are described in Table~\ref{tab:pf_collections}. The rest of this chapter describes the use of these objects in the H$\rightarrow\gamma\gamma$ analysis.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{r | p{0.7\linewidth}}
+        Object & Features  \\ \hline \hline
+        Muon & A pixel track that matches a muon track. The energy is calculated from the curvature of the track. \\ 
+        & \\
+        Electron & An ECAL SC that has an associated pixel track. The energy is measured by the track's curvature and the SC energy. \\
+        & \\
+        Photon & An ECAL SC that has no associated pixel track. The energy is measured by the SC energy. \\
+        & \\
+        Neutral Hadron & An ECAL cluster matched with an HCAL cluster that has no associated pixel track. The energy is the sum of the cluster energies. \\
+        & \\
+        Charged Hadron & An ECAL cluster matched with an HCAL cluster with an associated pixel track. The energy is computed through the track curvature and the sum of the cluster energies. \\ \hline
+    \end{tabular}
+    \caption{Object collections identified by the PF algorithm and their features.}
+    \label{tab:pf_collections}
+\end{table}
+
+\section{Samples}
+
+\subsection{Data}
+
+The data used in this analysis comes from p-p collisions collected by the CMS experiment at $\sqrt{s} = 13$ TeV during the Run 2 data-taking period at the LHC. The CMS experiment collected data in 2016, 2017, and 2018 and measured in an integrated luminosity of 137 fb$^{-1}$ with 35.9 fb$^{-1}$, 41.5 fb$^{-1}$, and 59.4 fb$^{-1}$ collected in each year respectively.
+
+Events in data are selected by the trigger system described in Section~\ref{sec:daq}. The trigger requirements are shown in Table~\ref{tab:double_eg_trigger}. The efficiency of the trigger selection is measured by a \textit{tag-and-probe} technique that exploits the well-known properties of the Z boson decay. In this technique, the \textit{tag} object in the Z boson decay is subject to stringent selection criteria. In contrast, the \textit{probe} object is subject to less stringent criteria, and the invariant mass of the tag-and-probe pair is required to be near that of the Z boson mass. For any selection criteria $C$, the efficiency of the selection criteria is the ratio of events passing $C$ to the total number of events. This method of determining the selection efficiency requires that the selection criteria applied to the probe do not affect the efficiency of the selection criteria $C$. 
+
+It is common in H$\rightarrow\gamma\gamma$ analyses to use Z$\rightarrow ee$ decays to validate and measure many detector and analysis properties such as efficiencies because the ECAL reconstructs both electrons and photons, and the Z boson mass is reasonably close to that of the Higgs boson. The tag-and-probe method described above is applied to electrons whose $\eta$ and $R_9$ distributions have been reweighted to match those distributions in H$\rightarrow\gamma\gamma$ events. The efficiency of the trigger is evaluated in bins of $p_T$, $\eta$, and R$_9$ for each SC. The variable R$_9$ is defined as the ratio of energy deposited in the 3$\times$3 block of crystals surrounding the seed crystal, divided by the energy of the SC (R$_9 = E_{3\times3} / E_{\mathrm{SC}}$). R$_9$ represents the degree to which a shower is columnated, with values near 1 indicating a highly columnated shower, and values near 0 indicating a very loosely columnated shower. Loosely columnated showers, \textit{i.e.} lower values of R$_9$, are correlated with objects that have had an interaction prior to reaching the ECAL. The trigger efficiencies for SCs in the EB and EE are 97\% and 95\%, respectively, and the product of these per SC efficiencies is used to weight simulated diphoton events to match the trigger efficiency observed in data. However, the trigger selections are much looser than the offline selection criteria used in the H$\rightarrow\gamma\gamma$ analyses.
+
+
+\begin{table}[htbp]
+    \renewcommand{\arraystretch}{1.5} % Default value: 1
+
+    \centering
+    \begin{tabular}{|r | p{0.78\linewidth}|}
+    \hline
+    trigger & requirements \\ \hline \hline
+    Level 1 & One 40 GeV energy deposit in the ECAL (30-32 GeV for isolated energy deposits) or two energy deposits in the ECAL with energies above 23 GeV and 10 GeV (25 GeV and 14 GeV in 2017 and 2018). \\ \hline
+    HLT & Two ECAL SCs with invariant mass greater than 90 GeV, and transverse momenta greater than 30 GeV and 18 GeV (30 GeV and 20 GeV in 2017 and 2018), and cuts on shower shape, isolation, and the ratio of HCAL energy to ECAL energy. \\ \hline
+    \end{tabular}
+    \caption{Trigger menu cuts for the acceptance of e/$\gamma$ objects.}
+    \label{tab:double_eg_trigger}
+\end{table}
+
+
+\subsection{Simulation}
+
+H$\rightarrow\gamma\gamma$ analyses use Monte Carlo (MC) simulated events to train event classifiers, create analysis categories, and build signal models. These simulated events go through the same processes as data; this includes being ``measured" through a simulated CMS detector, the reconstruction process using the PF algorithm, and the rest of the analysis chain. 
+
+Several Higgs boson production modes have been simulated at next-to-leading order (NLO) in perturbative QCD for H$\rightarrow\gamma\gamma$ analyses using the MAD-GRAPH5\textunderscore AMC\@NLO~\cite{amcatnlo} in combination with PYTHIA8~\cite{pythia} (to perform parton showering and hadronization) and POWHEG generators~\cite{powheg}. Events from the ggH production mode are further weighted to agree with next-to-next-to-leading order programs (NNLOPS)~\cite{nnlops}. The events produced using the POWHEG generator are exclusively used to train event classifiers for the analysis to ensure that events used in training are not used in this analysis.
+
+Despite being excluded from the background model, simulated background events are used to train event classifiers. The dominant background to H$\rightarrow\gamma\gamma$ analyses is the irreducible SM diphoton production, predominantly from $gg\rightarrow\gamma\gamma$. This background is simulated using the SHERPA program~\cite{sherpa}. The other types of background are $\gamma +$ jet (prompt-fake) events and jet $+$ jet (fake-fake) events where the jet ``fakes" a photon signature in the detector. These backgrounds are modeled using PYTHIA8, and selection criteria are applied to ensure a high density of events with large ECAL energy fractions since jets with large ECAL energy fractions look more like fake photons than those with larger HCAL energy fractions.
+
+All simulated events pass through a simulated version of the CMS detector built in \textsc{Geant4}~\cite{geant}. Additional pile-up interactions are included in the simulation. When necessary, the distribution of the number of pile-up interactions in the simulation is reweighted to match that of the corresponding year of data.
+
+
+\section{Photon reconstruction}
+
+The H$\rightarrow\gamma\gamma$ analysis uses photon candidates selected by the PF algorithm. The energy of these candidates is determined by the associated ECAL SC. It is common for photons to interact upstream of the detector, becoming a \textit{converted} photon or rather an electron-positron pair. A multivariate regression (MVA) is used to correct for energy losses upstream of the SC to estimate the initial energy of the photon. This MVA is trained on simulated data and instructed to use simulated detector readouts to predict the true energy of a simulated photon. After the MVA correction, residual energy scale corrections are applied to the data, and additional smearing corrections are applied to the simulation. Details on this procedure are presented in Chapter~\ref{chap:scales}. Once the photon energy has been corrected, selection criteria are applied to pick diphoton events most likely to have come from a Higgs boson. These selection criteria contain kinematic cuts and cuts on the photon identification boosted decision tree (BDT) score to distinguish prompt from fake photons. The full suite of selection criteria are described below.
+
+The variables used in the reconstruction process and their definitions are all listed in Table~\ref{tab:photon_variables}.
+
+\begin{table}[htbp]
+    \renewcommand{\arraystretch}{1.5} % Default value: 1
+
+    \centering
+    \begin{tabular}{|r | p{0.78\linewidth}|}
+        \multicolumn{2}{c}{\textbf{Shower Shape Variables}} \\ \hline \hline
+        $\eta_{\mathrm{clusters}}$ & the number of clusters in the SC \\ 
+        $\sigma_{\eta}$ & the standard deviation of single crystal $\eta$ values within a given SC weighted by the logarithm of the crystal energy \\
+        $\sigma_{\phi}$ & the standard deviation of single crystal $\phi$ values within a given SC weighted by the logarithm of the crystal energy \\ 
+        $\sigma_{i\eta i\eta}$ & the standard deviation of crystal cell number $\eta$ \\
+        $\sigma_{RR}$ & the standard deviation of the shower in the x-y plane of the ES  \\
+        cov$_{i\eta,i\phi}$ & the covariance of the single crystal $\eta$ and $\phi$ values in a 5$\times$5 grid centered on the seed crystal of the SC \\
+        $E_{2\times2}/E_{5\times5}$ & the ratio of the energy in a 2$\times$2 grid containing the most energetic cells in the SC to the energy in the 5$\times$5 grid centered on the SC seed \\
+        $R_9$ & the ratio of the energy in the 3$\times$3 grid centered on the SC and the total energy of the SC before corrections ($E_{3\times3}/E_{SC}$) \\ \hline \hline
+        \multicolumn{2}{c}{\textbf{Isolation Variables}} \\ \hline \hline
+        $H/E_{SC}$ & the ratio of the energy in HCAL cells matched to a SC to the energy of that SC \\
+        $\mathcal{I}_{\mathrm{ch}}$ & charged-hadron isolation: the sum of the $E_T$ of the PF charged hadrons falling inside a code of $\Delta R = \sqrt{\Delta\eta^2 + \Delta\phi^2} = 0.3$ around the SC, measured with respect to both the selected and worst vertex \\ 
+        $\mathcal{I}_{\mathrm{ph}}$ & photon isolation: the sum of the $E_T$ of PF photons in a cone of $\Delta R = 0.3$ around the SC \\
+        $\mathcal{I}_{\mathrm{tk}}$ & track isolation: the sum of the $E_T$ of all the tracks in a hollow cone with an outer radius of $\Delta R = 0.4$ and an inner radius of $\Delta R = 0.3$ \\ \hline \hline
+        \multicolumn{2}{c}{\textbf{Miscellaneous}} \\ \hline \hline
+        $\rho$ & median energy density per unit area in the event \\
+        $E_{\gamma}$ & reconstructed photon energy \\
+        $E_{SC}$ & uncorrected supercluster energy \\
+        $E_{true}$ & true photon energy \\
+        Electron veto & boolean variable set to false if the SC is matched to a track \\ \hline \hline
+    \end{tabular}
+    \caption[Definitions of variables used in $H\rightarrow\gamma\gamma$ analyses.]{Definitions of variables used in $H\rightarrow\gamma\gamma$ analyses. The shower shape variables are used to correct the regressed photon energy and the isolation variables are used to identify objects ``faking" a photon signature, such as neutral jets or mesons.}
+    \label{tab:photon_variables}
+\end{table}
+
+
+\subsection{Photon energy}
+
+The energy response of the ECAL ($E_{true}/E_{SC}$) is characterized by a Gaussian core with power law tails. The algorithm used to estimate the energy of an SC is shown in Equation~\ref{eqn:ecal_energy}. In this equation, the term $F_{e/\gamma}$ corrects the SC energy to the energy of the $e/\gamma$ and accounts for energy losses from incomplete shower containment due to early conversion, energy lost to the gaps between ECAL crystals and modules, energy lost at the back of the crystal from a long electromagnetic shower or late initial interaction in the crystal, and energy lost to noisy crystals in the clustering algorithm. This correction is derived using an MVA regression that learns the shape of the ECAL energy response and provides a predicted PDF of the ECAL energy response for each photon.
+
+After the MVA regression corrections, additional corrections are applied to the photon energy to account for residual differences between data and MC. The motivation and derivation of these corrections are described in Chapter~\ref{chap:scales}.
+
+\subsection{Photon pre-selection}
+
+Addition selection criteria are applied to diphoton events to reduce the number of events in which one or two jets fake a photon. These criteria are as follows:
+\begin{enumerate}
+    \item Minimum $p_T$: the leading photon (most energetic) is required to have a $p_T > 35$ GeV, and the subleading photon (least energetic) is required to have a $p_T > 25$ GeV.
+    \item Geometric acceptance: both photons must fall within $|\eta| < 2.5$, excluding the transition region $1.4442 < |\eta| < 1.566$.
+    \item Electron Veto: both photons must have a True electron veto, i.e., neither photon can have an associated track.
+    \item Hadronic shower rejection: The fraction of energy deposited in the HCAL to that of the ECAL SC cannot exceed 0.08 (H$/E_{SC} < 0.08$).
+    \item Shower shape and isolation requirements: 
+    \begin{enumerate}
+        \item Photons in the barrel: Photons with $R_9 > 0.85$ have no additional isolation requirements. Photons with $0.5 < R_9 < 0.85$ must have $\sigma_{i\eta i\eta} < 0.015$, a photon isolation ($\mathcal{I}_{\mathrm{ph}}$) $< 4.0$ GeV, and a tracker isolation ($\mathcal{I}_{\mathrm{tk}}$) $< 6.0$ GeV.
+        \item Photons in the endcap: Photons with $R_9 > 0.90$ have no additional isolation requirements. Photons with $0.8 < R_9 < 0.9$ must have $\sigma_{i\eta i\eta} < 0.035$, a photon isolation ($\mathcal{I}_{\mathrm{ph}}$) $< 4.0$ GeV, and a tracker isolation ($\mathcal{I}_{\mathrm{tk}}$) $< 6.0$ GeV.
+        \item All photons must have $R_9 > 0.8$, a charge isolation ($\mathcal{I}_{\mathrm{ch}}$) $< 20$ GeV, and a charge isolation to transverse momentum ($\mathcal{I}_{\mathrm{ch}}/p_T^{\gamma}$) $< 0.3$.
+    \end{enumerate}
+\end{enumerate}
+
+The pre-selection efficiency of these criteria, excluding the electron veto, is calculated using the tag-and-probe method applied to Z$\rightarrow ee$ events. The electron veto efficiency is calculated using Z$\rightarrow\mu\mu\gamma$ events. These events must have an invariant mass of 60 to 120 GeV. The pre-selection criteria, except the electron veto, are then applied to the photons, and the efficiency of the electron veto is found from the fraction of events that pass the electron veto. The pre-selection efficiency is around 90\% and rises above 95\% for photons with $R_9 > 0.95$. Per photon weights match the pre-selection efficiency in simulation to that observed in data.
+
+\subsection{Photon identification}
+
+A photon identification BDT is used to reject fake photons and is trained on a $\gamma+$jets simulation sample. This BDT takes as input the shower-shape, kinematic, and isolation variables, as well as variables sensitive to pile-up, such as $\rho$. One of the historically larger sources of uncertainty in H$\rightarrow\gamma\gamma$ analyses is the modeling of EM showers in simulation. Since the BDT takes several shower-shape variables as input, any discrepancies in the shower-shape variables between data and simulation will be propagated to the output of the BDT, significantly affecting its performance. These discrepancies are addressed by correcting the shower shape variables used as input to the photon ID BDT using a chained quantile regression (CQR)~\cite{cqr}. Chapter~\ref{sec:syst_unc} provides additional details on the systematic uncertainty.
+
+For a given input variable, the CQR method trains a series of 21 BDTs to predict the input variable's cumulative distribution function (CDF) at 21 points along its range. For example, a series of BDTs predict the CDF($R_9$) at the points [0.01, 0.05, 0.10, ..., 0.95, 0.99]. Once the predicted values are obtained, they are linearly interpolated to get the full CDF. This process is performed on both data and simulation to define a correction value for each electron in simulation such that the input variable matches the shape of the variable in data. The correction is defined as:
+
+\begin{equation}
+    S_i \rightarrow S_i^{\mathrm{corr}} = \mathrm{CDF}^{-1}_{\mathrm{data}}( \mathrm{CDF_{simulation}}(S_i))
+\end{equation}
+where $S_i$ is any variable used as input to the photon ID BDT. 
+
+This method's ``chained" aspect refers to the inclusion of previously corrected shower shape variables in the training of successive CDF BDTs. Consider a set of N shower shape variables $[S_1,\ S_2,\ S_3,\ ...,\ S_N]$. The BDTs trained to predict points along CDF($S_1$) are given only $p_T^{e}$, $\eta$, $\phi$, and $\rho$. However, the BDTs trained to predict points along CDF($S_i|_{i\neq 1}$) are given the initial variables, as well as the corrected shower shape variables $[S_1,\ ...,\ S_{i-1}]$ (or $[S_1^{\mathrm{corr}},\ ...,\ S_{i-1}^{\mathrm{corr}}]$ in the case of simulation). This chaining of the input variables accounts for their correlations, and the order of the chaining is optimized to reduce differences in the photon ID BDT output in data and simulation. 
+
+\begin{figure}[hbtp!]
+\subfloat{
+\begin{minipage}[t]{0.5\textwidth}%
+\begin{center}
+\includegraphics[width=\textwidth]{04-figures/photon_id_bdt.png}
+\par\end{center}%
+\end{minipage}
+}~\subfloat{%
+\begin{minipage}[t]{0.5\textwidth}%
+\includegraphics[width=\textwidth]{04-figures/photon_id_bdt_e_as_g.png}
+\end{minipage}
+}
+\caption[Photon ID BDT]{Left: the photon ID BDT score distribution for the lowest scoring photon in diphoton events with an invariant mass between 100 GeV and 180 GeV. Right: the distribution of the photon ID BDT score for the lowest scoring electron in dielectron events from Z bosons where the electrons are reconstructed as photons. Figures taken from ~\cite{cms:2021:stxs}.}
+\label{fig:pho_id_bdt}
+\end{figure}
+
+Isolation variables are treated slightly differently due to the discontinuity between the peaks and tails of the distributions. Two classifiers are trained to predict whether an electron should fall in the peak or tail of the given distribution, and simulated electrons are moved between the peak and tail based on the output of the classifiers so that the composition of the tail and peak match that of data. After this process, the CQR method is applied to electrons in the tails of the isolation variables. Ref~\cite{cms:2021:stxs} provides additional information on the CQR method and its applications.
+
+Finally, a loose cut is applied to the photon ID BDT score ($> -0.9$) to reduce the number of $\gamma +$jet and jet$+$jet events by 70\% while keeping $>99$\% of signal events. This cut ensures that the statistical power of the background simulation is strong enough to train event categorization discriminants. The distribution of the photon-ID BDT score for the lowest scoring photon in diphoton events, as well as the same for electrons reconstructed as photons, is shown in Figure~\ref{fig:pho_id_bdt}
+
+
+\section{Vertex reconstruction}
+
+Equation~\ref{eqn:mgg} shows the relationship between the diphoton invariant mass and its relationship to the photon energies and their opening angle. Recall the claim that keeping the resolution on the diphoton vertex to less than 1 cm ensures that the dominant sources of uncertainty on the invariant mass come from the photon energies. This section explains the origins of this claim. 
+
+To begin, recall that there are multiple p-p collisions in each bunch crossing, meaning multiple vertices are spread along the beam line's axis. Suppose the wrong vertex is chosen from among roughly the 35 vertices. In that case, the opening angle of the two photons directly affects the diphoton invariant mass resolution. This effect is negligible when the chosen vertex is within 1 cm of the true vertex, and to ensure this resolution on vertex selection is achieved, a BDT is trained to identify the most probably primary vertex.
+
+\subsection{Vertex selection}
+\label{sec:vertex_selection}
+
+The BDT trained to select the most probable primary vertex is trained on simulated ggH H$\rightarrow\gamma\gamma$ events and takes the following variables as input. The sums in the following definitions run over the PF tracks associated with a given vertex with label $i$, and the quantity $\overline{p}_T^{\gamma\gamma}$ is the transverse momentum of the diphoton system with respect to the vertex $i$.
+
+\begin{itemize}
+    \item $\sum_i |\overline{p}_T^{(i)}|^2$
+    \item $-\sum_i \frac{\overline{p}_T^{(i)} \cdot \overline{p}_T^{\gamma\gamma}}{|\overline{p}_T^{\gamma\gamma}|}$
+    \item $\frac{|\sum_i \overline{p}_T^{(i)}| - p_T^{\gamma\gamma}}{|\sum_i \overline{p}_T^{(i)}| + p_T^{\gamma\gamma}}$
+\end{itemize}
+
+For events with photon conversions, the BDT is given the following inputs in addition to those above:
+
+\begin{itemize}
+    \item the number of photon conversions in the tracker
+    \item $\frac{|z_{\mathrm{vtx}} - z_{\mathrm{e}}|}{\sigma_z}$: the pull between the z-positions of the reconstructed vertex ($z_{\mathrm{vtx}}$) and the estimated vertex from photon conversions ($z_{\mathrm{e}}$) with respect to the uncertainty on $z_{\mathrm{e}}$ ($\sigma_z$).
+\end{itemize}
+
+The BDT creates a score for each vertex; the vertex with the highest score is chosen as the primary interaction point. If the primary interaction point is within 1 cm of the actual interaction point, it is labeled as the ``correct" vertex. The vertex choice efficiency in H$\rightarrow\gamma\gamma$ events is $\sim$79\%, shown in Figure~\ref{fig:vertex_eff} alongside the vertex probability BDT score. The vertex probability BDT is trained to predict the probability that the selected vertex is within 1 cm of the true diphoton vertex. This BDT takes as input the number of reconstructed vertices, the relative positions and vertex assignment BDT scores for the three highest-scored vertices, the transverse momentum of the diphoton system, and the number of converted photons in the tracker. This BDT is trained on simulated ggH, H$\rightarrow\gamma\gamma$ events. 
+
+
+\section{Electron reconstruction}
+
+While the differences between photon and electron reconstruction are minor, they are essential to note. During reconstruction, electrons must have a matching track instead of a track veto. Additionally, electrons can be seeded by either tracks or calorimeter deposits. The electron energy regression includes information about tracks and accounts for energy lost to bremsstrahlung. Ref~\cite{cms:2021:egamma_reconstruction} contains more details on electron reconstruction.
+
+\begin{figure}[hbtp]
+\subfloat{%
+\begin{minipage}[t]{0.5\textwidth}%
+\begin{center}
+\includegraphics[width=\textwidth]{04-figures/vertex_eff_data.png}
+\par\end{center}%
+\end{minipage}
+}~\subfloat{%
+\begin{minipage}[t]{0.5\textwidth}%
+\includegraphics[width=\textwidth]{04-figures/vertex_eff_sim.png}
+\end{minipage}
+}
+\caption[Vertex efficiency]{Left: the fraction of Z$\rightarrow\mu\mu$ events with a vertex assigned within 1 cm of the true vertex position as a function of the dimuon transverse momentum. Muon tracks are omitted from the event reconstruction to mimic H$\rightarrow\gamma\gamma$ events. Right: the relationship between the average vertex probability BDT score and the true vertex efficiency. The average vertex probability score accurately represents the true vertex efficiency. Figures taken from ~\cite{cms:2021:stxs}.}
+\label{fig:vertex_eff}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

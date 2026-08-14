@@ -57,8 +57,8 @@
 
   function getPieceSymbol(piece: PieceType): string {
     switch (piece) {
-      case 'sun': return '●';  // Solid circle for sun
-      case 'moon': return '◐'; // Half-moon symbol
+      case 'sun': return '●';  // Solid circle for sun - can be styled with CSS color
+      case 'moon': return '◐'; // Half-moon symbol - can be styled with CSS color
       default: return '';
     }
   }
@@ -72,7 +72,7 @@
     disabled={isLocked || gameStore.state.isMakingMove}
     aria-label="Game tile at row {row + 1}, column {col + 1}: {piece}"
   >
-    <span class="text-3xl select-none">
+    <span class="game-piece">  <!-- Using custom CSS class for precise piece size control -->
       {getPieceSymbol(piece)}
     </span>
   </button>

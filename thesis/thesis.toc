@@ -1,0 +1,105 @@
+\contentsline {chapter}{Acknowledgements}{i}{chapter*.1}%
+\contentsline {chapter}{Dedication}{ii}{chapter*.2}%
+\contentsline {chapter}{Abstract}{iii}{chapter*.2}%
+\contentsline {chapter}{List of Tables}{v}{chapter*.4}%
+\contentsline {chapter}{List of Figures}{vi}{chapter*.5}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}The Standard Model and the Higgs boson}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}The Standard Model}{4}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Introduction}{4}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Components of the Standard Model}{4}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Gauge invariant fields}{6}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Local U(1) Symmetry: Quantum electrodynamics}{7}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}SU(N) Symmetries: strong and weak interactions}{8}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Strong interactions}{9}{subsection.2.1.6}%
+\contentsline {subsection}{\numberline {2.1.7}Electroweak interactions}{10}{subsection.2.1.7}%
+\contentsline {section}{\numberline {2.2}Spontaneous symmetry breaking in the electroweak sector}{13}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Properties of the Higgs boson}{15}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Higgs boson production at the LHC}{16}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Higgs boson decay modes}{16}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Status of Higgs boson measurements}{17}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Summary and strategy}{18}{section.2.4}%
+\contentsline {chapter}{\numberline {3}The CMS experiment}{20}{chapter.3}%
+\contentsline {section}{\numberline {3.1}The Large Hadron Collider}{20}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Overview of the CMS detector}{21}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Detector coordinate system}{22}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}The Tracker}{23}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}The Pixel tracker}{23}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}The Silicon Strip tracker}{24}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Performance of the Tracker}{24}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}The Electromagnetic calorimeter}{25}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Lead Tungstate (PbWO$_4$) Crystals}{26}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Photodetectors}{26}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Laser Monitoring}{27}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Calibration and Energy Resolution}{28}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Hadronic calorimeter}{30}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Muon detection systems}{31}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Drift tube chambers}{31}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Cathode strip chambers}{31}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Resistive plate chambers}{31}{subsection.3.6.3}%
+\contentsline {section}{\numberline {3.7}Data acquisition}{32}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Level 1 trigger}{32}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}High level trigger}{32}{subsection.3.7.2}%
+\contentsline {chapter}{\numberline {4}Event reconstruction and selection}{34}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{34}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Particle flow}{35}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Samples}{36}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Data}{36}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Simulation}{37}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Photon reconstruction}{38}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Photon energy}{39}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Photon pre-selection}{39}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Photon identification}{40}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Vertex reconstruction}{42}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Vertex selection}{42}{subsection.4.5.1}%
+\contentsline {section}{\numberline {4.6}Electron reconstruction}{43}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Measurement of the energy scale and resolution of the CMS ECAL}{44}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{44}{section.5.1}%
+\contentsline {section}{\numberline {5.2}The energy resolution of the CMS ECAL}{45}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Stability of the time response corrections}{45}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Inter-calibration precision}{46}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Interaction with the upstream material}{46}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}The energy scale and resolution of electrons in the CMS ECAL}{47}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Z$\rightarrow e^+e^-$ event selection}{47}{subsection.5.3.1}%
+\contentsline {subsubsection}{Trigger}{47}{section*.6}%
+\contentsline {subsubsection}{Offline selection}{47}{section*.7}%
+\contentsline {subsection}{\numberline {5.3.2}Simulation}{49}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Comparison of data and MC samples}{49}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}The global smearing method}{50}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Framework outline}{50}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}The ``median method"}{52}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Dielectron event categorization}{52}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Dielectron invariant mass binning}{53}{subsection.5.4.4}%
+\contentsline {subsection}{\numberline {5.4.5}Loss function}{54}{subsection.5.4.5}%
+\contentsline {subsection}{\numberline {5.4.6}Validation of the GSM}{55}{subsection.5.4.6}%
+\contentsline {section}{\numberline {5.5}Results}{56}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Time stabilization}{56}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}$E_T$ dependent residual scales and additional smearings}{56}{subsection.5.5.2}%
+\contentsline {chapter}{\numberline {6}Event categorisation}{58}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Overview}{58}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Diphoton BDT}{59}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Event categorization using the diphoton BDT score}{60}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Samples}{60}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Boundary optimization and loss function}{61}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Optimal number of categories}{62}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Optimized boundaries and categories}{62}{subsection.6.3.4}%
+\contentsline {chapter}{\numberline {7}Statistical analysis}{63}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Introduction}{63}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Likelihood ratio test}{64}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Extracting results using the likelihood ratio test}{65}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Nuisance parameters in likelihood ratio tests}{65}{subsection.7.2.2}%
+\contentsline {section}{\numberline {7.3}Signal modeling}{67}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Background modeling}{68}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Discrete profiling method}{68}{subsection.7.4.1}%
+\contentsline {section}{\numberline {7.5}Systematic uncertainties}{69}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Systematic uncertainties common to all H$\rightarrow \gamma \gamma $ analyses}{70}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Systematic uncertainties affecting the electron energy scale propagated to the photon energy}{71}{subsection.7.5.2}%
+\contentsline {subsubsection}{Uncertainty on the electron residual energy scale and additional smearing corrections}{71}{section*.8}%
+\contentsline {subsubsection}{Non-linearity}{73}{section*.9}%
+\contentsline {subsection}{\numberline {7.5.3}Additional systematic uncertainties affecting photon energies}{73}{subsection.7.5.3}%
+\contentsline {subsubsection}{Uncertainty on the material}{73}{section*.10}%
+\contentsline {subsubsection}{The non-uniformity of light collection in the ECAL crystals}{74}{section*.11}%
+\contentsline {subsubsection}{Uncertainty from shower shape modeling}{78}{section*.12}%
+\contentsline {section}{\numberline {7.6}Final models}{79}{section.7.6}%
+\contentsline {chapter}{\numberline {8}Higgs boson mass measurement}{80}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Summary}{81}{chapter.9}%

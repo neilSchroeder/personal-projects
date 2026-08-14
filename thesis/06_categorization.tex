@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% intro.tex: Introduction to the thesis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Event categorisation}
+\label{chap:categorisation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Overview}
+
+After the H$\rightarrow\gamma\gamma$ events are reconstructed, and before categorization, they are subject to additional cuts on their transverse momenta to improve the agreement between data and simulation in the lower tails of the diphoton invariant mass distribution. The event must have a diphoton invariant mass in the range 100 GeV to 180 GeV, and the leading (highest energy) and subleading (second highest energy) photons must satisfy $p_T^{\gamma 1} > m_{\gamma\gamma}/3$ and $p_T^{\gamma 2} > m_{\gamma\gamma}/4$ respectively. Additionally, all events must be within $|\eta| < 2.5$, but not in the ECAL barrel-endcap transition region $1.4442 < |\eta| < 1.566$. 
+
+All diphoton events are sorted into categories based on their mass resolution and predicted signal-to-background ratio using the diphoton BDT score (described below). This sorting, or categorization, enhances the sensitivity of the analysis and improves the overall precision of the Higgs boson mass measurement. Unlike previous studies, this analysis does not categorize based on production mode. Adding additional production mode categories results in a slight improvement in the precision of the mass measurement by reducing the statistical uncertainty. However, since the precision of this analysis is limited by the systematic uncertainty, small gains in the statistical uncertainty are negligible.
+
+
+\section{Diphoton BDT}
+
+The diphoton BDT is an event classifier that assigns high scores to events with the following properties:
+\begin{itemize}
+    \item the photons have signal-like momentum and energy distributions
+    \item the photons have sufficiently high photon ID BDT scores
+    \item a good diphoton mass resolution
+\end{itemize}
+
+The diphoton BDT does not use the invariant mass directly, to avoid biasing the results. The diphoton BDT takes the following variables as input:
+
+\begin{itemize}
+    \item the transverse momentum rescaled by the invariant mass of the leading (1) and subleading (2) photons: $p_T^{\gamma 1(2)} / m_{\gamma\gamma}$
+    \item the pseudorapidity of both photons: $\eta^{1(2)}$
+    \item the cosine of the angle between the photons: $\cos(\theta_{1,2})$
+    \item the photon ID BDT score for both photons
+    \item the relative mass resolution, assuming reconstruction happened under the right vertex (RV): $\sigma_{\mathrm{RV}}$
+    \item the relative mass resolution, assuming reconstruction under the wrong vertex (WV): $\sigma_{\mathrm{WV}}$
+    \item the vertex probability BDT score: $p_{\mathrm{vtx}}$ (see Sec~\ref{sec:vertex_selection}).
+\end{itemize}
+
+In the above definitions, the RV relative mass resolution assumes Gaussian resolution functions for the photon energy and is defined as:
+
+\begin{equation}
+    \sigma_{\mathrm{RV}} = \frac{\sigma_{m}^{\mathrm{right}}}{m_{\gamma\gamma}} = \frac{1}{2} \sqrt{\left(\frac{\sigma_{E_1}}{E_1}\right)^2 + \left(\frac{\sigma_{E_2}}{E_2}\right)^2}.
+\end{equation}
+
+Under the WV assumption, the relative mass resolution includes an extra factor that measures the distance between the correct vertex and the selected primary vertex: $\sigma_{\mathrm{vtx}}$. This extra factor leads to the following definition:
+
+\begin{equation}
+    \sigma_{\mathrm{WV}} = \frac{\sigma_m^{\mathrm{wrong}}}{m_{\gamma\gamma}} = \sqrt{\left(\frac{\sigma_m^{\mathrm{right}}}{m_{\gamma\gamma}}\right)^2 + \left(\frac{\sigma_{\mathrm{vtx}}}{m_{\gamma\gamma}}\right)^2}.
+\end{equation}
+
+The following weights are applied to signal events used to train the BDT:
+
+\begin{equation}
+    w_{\mathrm{sig}} = \frac{p_{\mathrm{vtx}}}{\sigma_{\mathrm{RV}}} + \frac{1 - p_{\mathrm{vtx}}}{\sigma_{\mathrm{WV}}}.
+\end{equation}
+
+These weights ensure that events with a better mass resolution are assigned a higher diphoton BDT score because they are suppressed by $\sigma_{\mathrm{RV}}$ and $\sigma_{\mathrm{WV}}$, which get smaller as the relative resolution improves. The diphoton BDT score for the full Run 2 dataset is shown in Figure~\ref{fig:diphoton_bdt}.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{06-figures/diphoton_bdt_score.png}
+    \caption[Diphoton BDT score]{The diphoton BDT score for data and simulation in the Run 2 dataset \cite{cms:2021:stxs}.}
+    \label{fig:diphoton_bdt}
+\end{figure}
+
+\section{Event categorization using the diphoton BDT score}
+
+Splitting the analysis into categories where events have similar properties, increases the expected significance and improves the precision of the analysis. The categories are defined in terms of the boundaries in the diphoton BDT space. Their location is determined by minimizing a loss function that targets the relative diphoton invariant mass resolution ,and the ratio of signal events to the square root of background events ($\mathrm{S}/\sqrt{\mathrm{B}}$). The number of categories used in the analysis is determined by eye by comparing the degree of improvement between the minimum of the loss function for $n$ categories and $n+1$ categories.
+
+\subsection{Samples}
+
+The signal samples used in this derivation are NLO samples with the ggH, VBF, VH, and ttH production modes generated with a Higgs mass set at 125 GeV. The background samples are generated with a data-driven approach outline in Section 6.5 of ~\cite{cms:2021:stxs}.
+
+\subsection{Boundary optimization and loss function}
+
+The optimization process begins by picking a random set of $n$ boundaries in the range 0 - 1, whose values are denoted as $b_i$. To ensure that $n$ boundaries correspond to $n$ categories and not $n+1$, all events in the range 0 - $b_0$ are ignored, leaving only events in the range $b_0$ - 1. For each category $c_i$, with lower bound $b_i$, the minimum range in the diphoton invariant mass space containing 68.3\% of events is computed. Events in this range are used to calculate the standard deviation ($\sigma_{i}^{\gamma\gamma}$) and mean ($m_i^{\gamma\gamma}$) of the invariant mass as well as their uncertainties. 
+
+The loss function used in the optimization of the diphoton BDT score boundaries is defined as:
+
+\begin{equation}
+    L = 1000 * \frac{\sum_i \sigma_i^{\gamma\gamma} / \sigma_{\sigma_i^{\gamma\gamma}} }{ \sum_i 1/\sigma_{\sigma_i^{\gamma\gamma}}} \frac{\sum_i 1/\sigma_{m_i^{\gamma\gamma}}^2}{\sum_i m_i^{\gamma\gamma} / \sigma_{m_i^{\gamma\gamma}}^2} * \sum_i \frac{\mathrm{B}_i}{\mathrm{S}_i^2}.
+\end{equation}
+
+Where $\sigma_i^{\gamma\gamma}$ is the standard deviation in category $i$, $\sigma_{\sigma_i^{\gamma\gamma}}$ is the uncertainty on the standard deviation, $\sigma_{m_i^{\gamma\gamma}}$ is the uncertainty on the invariant mass, B$_i$ is the number of background events, and S$_i$ is the number of signal events. This loss function encourages the minimization of the combined relative resolution of the categories and the maximization of the signal-to-background ratio. Due to the complicated behavior of the loss function as a function of changes in the location of the boundaries, a Monte-Carlo strategy paired with a modified Nelder-Mead minimization algorithm~\cite{gao2012:nelder_mead} is used to find the boundaries corresponding to a global minimum. The Monte-Carlo approach generates random boundaries in the diphoton BDT space, and the minimization algorithm minimizes the loss function by using the random boundaries as its starting location. The process of generating and optimizing random boundaries is repeated 2000 times. Each set of boundaries and their minimized loss score is recorded, and the boundaries that produce the lowest loss are returned as the optimal boundaries.
+
+\subsection{Optimal number of categories}
+
+As mentioned, the optimal number of categories is determined by observing the drop-off in the gain and loss function as a function of the number of categories. The number of categories tested ranged from one to six, and the value of the loss function as a function of the number of categories is shown in Figure~\ref{fig:loss_vs_n}. It was found that four analysis categories for each year's dataset was optimal.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{06-figures/optNumCats_ul18_minima.png}
+    \caption[Category loss vs. number of categories]{The minimum loss as a function of the number of categories for 2016 preVFP events.}
+    \label{fig:loss_vs_n}
+\end{figure}
+
+\subsection{Optimized boundaries and categories}
+
+Table ~\ref{tab:boundaries} lists the final boundaries derived for each dataset. To further improve the resolution, and to minimize the systematic uncertainties affecting the mass measurement, the categories are broken down by kinematic features. The ``cleanest" events are those where both photons are in the EB (``BothEBUntaggedTag\textunderscore~X), and the remaining events are grouped into a single ``NotEBEBUntaggedTag\textunderscore~0" category, i.e., the highest diphoton MVA category. To further reduce the systematic uncertainty on the mass measurement, events with photons in the forward region of the EE (|$\eta$| $ > $ 2.1) are dropped. This restriction is discussed in Chapter~\ref{chap:stats}.
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ c  c  c}
+        dataset & EB-EB boundaries &  not-EB-EB \\ \hline \hline
+        2016 preVFP  & [0.7319, 0.8564, 0.9071, 0.9607, 1] & [0.5462, 1] \\ \hline
+        2016 postVFP & [0.7860, 0.8686, 0.9439, 0.9743, 1] & [0.5486, 1] \\ \hline
+        2017         & [0.7271, 0.8519, 0.9055, 0.9544, 1] & [0.5849, 1] \\ \hline
+        2018         & [0.7479, 0.8505, 0.9101, 0.9545, 1] & [0.5946, 1] \\ \hline 
+    \end{tabular}
+    \caption[Optimized diphoton BDT boundaries.]{The optimized diphoton BDT boundaries as derived for each dataset using the method described above.}
+    \label{tab:boundaries}
+\end{table}

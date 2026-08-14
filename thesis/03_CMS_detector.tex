@@ -1,0 +1,292 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% experiment.tex: Chapter describing the experiment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The CMS experiment}
+\label{chap:cms}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Large Hadron Collider}
+
+The Large Hadron Collider (LHC) is a proton-proton collider sited near
+Geneva, Switzerland, in a 27 km long underground tunnel that holds a vacuum pipe containing two
+counter-rotating beams of protons. These protons are steered using magnets and collide at
+four interaction points (IPs). Two IPs are central to general-purpose detectors: the Compact Muon Solenoid (CMS) and A Toroidal LHC Apparatus (ATLAS). Figure~\ref{fig:lhc_layout} shows the location of these detectors and the layout of the LHC. Two of the main goals of the LHC program are to determine 
+the mechanism of electroweak symmetry breaking and to search for physics beyond the SM. As such, the LHC was designed to implement proton-proton collisions with a maximum center of mass energy of 14 TeV and a
+maximum luminosity of 10$^{34}$cm$^{-2}$s$^{-1}$.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{03-figures/Overall view of the LHC.jpg}
+\caption[Diagram of the Large Hadron Collider]{Diagram of the Proton Synchrotron, the Super Proton Synchrotron, the LHC, and its associated detectors underneath the region in and around Geneva~\cite{Servicegraphique:1708849}.}
+\label{fig:lhc_layout}
+\end{figure}
+
+
+The construction of the LHC was a massive undertaking, and several past experiments and their facilities were used to conserve space and funding. For example, the LHC's tunnel previously held the CERN's large
+electron-positron collider, and CERN's proton synchrotron (PS) and super proton synchrotron (SPS) are now injectors to the LHC. 
+
+The process of preparing the beams is complex and contains multiple steps. Initially, protons are extracted from a hydrogen plasma and directed through linear accelerators and proton synchrotrons. The acceleration sequence proceeds as follows: it begins with the acceleration of protons extracted from a hydrogen gas plasma to an energy of 50 MeV using a series of linear accelerators. From there, they are injected into the Proton Synchrotron (PS) booster ring, where they are bunched and accelerated to an
+energy of 25 GeV. Next, the protons are transferred to the Super Proton Synchrotron (SPS) booster, where they reach an energy of 450 GeV. Finally, the proton bunches are injected into the two rings of the LHC, where they reach an energy of 7 TeV. 
+
+The beams in the LHC are steered using 1232 superconducting dipole magnets cooled to 1.9 K, which produce
+magnetic fields up to 8.4 T. RF cavities are used to accelerate the beams and to compensate for the energy loss due to synchrotron radiation once the beams have reached their full energy. At the end of the cycle, the LHC contains up to 2808 bunches of protons separated by 7.5 m that collide in the IPs at 25 ns intervals, corresponding to a bunch collision rate of 40 MHz. Due to the large number of protons in each bunch, there are, on average, 35 separate proton-proton collisions in each bunch crossing. 
+
+For the three years that the CMS experiment collected data for this analysis, the LHC operated at a center of mass energy of 13 TeV and a bunch spacing of 25 ns. The delivered luminosity in 2016, 2017, and 2018 were 41.58 fb$^{-1}$, 49.79 fb$^{-1}$, and 67.86 fb$^{-1}$, respectively. The data collected during this three-year period is known as Run 2. Figure~\ref{fig:int_lumi} shows the cumulative integrated luminosity of Run 2.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{03-figures/int_lumi_allcumulative_pp_run2.png}
+    \caption[Large Hadron Collider delivered luminosity]{The delivered integrated luminosity of the LHC and the integrated luminosity recorded by CMS. }
+    \label{fig:int_lumi}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Overview of the CMS detector}
+
+The CMS detector is located at Point 5 in the LHC ring. It is a general-purpose detector whose central feature is a high-magnetic field solenoid. Figure~\ref{fig:cms_layout} shows the main features of the detection, and Figure~\ref{fig:cms_slice} shows the functionality of the parts of the detector, known as sub-detectors. The superconducting solenoid from which the CMS detector gets its name has a radius of 6.3 m, a length of 12.5 m, and produces a magnetic field of 3.8 T. The pixel and strip silicon trackers, the lead-tungstate (PbWO$_4$) crystal electromagnetic calorimeter (ECAL), and a brass and plastic scintillator hadron calorimeter (HCAL) are all located inside the solenoid. A steel return yoke outside the solenoid returns the magnetic field flux. Embedded in the return yoke are gas-ionization chambers used for detecting muons. For further information on the CMS detector, see Ref.~\cite{cms:2008}. A description of the components of the CMS detector used to measure the decay of the Higgs boson to two photons, the subject of this thesis, follows.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{03-figures/cms_detector_3D.png}
+    \caption[Compact Muon Solenoid schematic: 3D]{A 3D schematic of the CMS detector and its sub-detectors.}
+    \label{fig:cms_layout}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{03-figures/CMSslice_whiteBackground.png}
+    \caption[Compact Muon Solenoid schematic: 2D]{A 2D slice of the CMS detector and its sub-detectors with particle overlays showing the purpose of, and interactions measured by, each sub-detector. }
+    \label{fig:cms_slice}
+\end{figure}
+
+\subsection{Detector coordinate system}
+
+An essential part of any measurement is establishing a standard Cartesian coordinate system used through the detector. In CMS, the detector uses a right-handed coordinate system. The origin of the system is at the IP. The $x$-axis points toward the center of the LHC ring; the $y$-axis points upward; and the $z$-axis points in the direction of the counter-clockwise beam as viewed from above. In addition to the rectilinear coordinate system, a cylindrical coordinate system is used. In this system, the radial distance $r$ is defined in the $x$-$y$ plane, the azimuthal angle $\phi$ is measured from the positive $x$-axis, and the polar angle $\theta$ is measured from the positive $z$-axis.
+
+It is often helpful to express the production angle in terms of the particle's rapidity, defined as
+
+\begin{equation}
+    y = \tanh^{-1}\left(\frac{p_{z} c}{E}\right)
+\end{equation}
+
+where $p_z$ is the momentum of the particle along the $z$-axis, $c$ is the speed of light, and $E$ is the energy of the particle. Differences in rapidity are Lorentz invariant to boosts along the $z$-axis, making it useful for determining angles between particles. For highly relativistic particles whose mass is negligible, rapidity reduces to pseudorapidity ($\eta$), defined as:
+
+\begin{equation}
+    y \approx \eta = - \ln \tan \left(\frac{\theta}{2}\right).
+\end{equation}
+
+Rapidity and pseudorapidity range from ($-\infty$,$\infty$) for $\theta = (\pi, 0)$, and is 0 when $\theta = \frac{\pi}{2}$ in the central plane of the detector. The CMS detector can measure particles with pseudorapidities between -5 and 5, with full coverage of all the sub-detectors ranging from -2.5 to 2.5 in pseudorapidity. Other commonly used variables include a particle's transverse momentum $\overline{p}_T$ and transverse energy $E_T$. These represent the magnitude of a particle's momentum and energy perpendicular to the beamline, and assuming the particle to have negligible mass, are defined as:
+\begin{equation}
+    |\overline{P}_T| \approx E_T \approx \frac{E}{\cosh{\eta}}.
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Tracker}
+
+From the IP, the tracker is, radially, the first sub-detector that particles encounter. Charged particles interact with the various parts of the tracker, and the helical tracks measured from these interactions are collected and fit to determine their momenta. The tracks also help determine the location of the interaction's vertex or point of origin. When the LHC is in operation, each bunch crossing produces $\sim$35 interactions with $\sim$1000 charged particle tracks.
+
+The tracker's crucial design elements included the detector's granularity, measurement speed, and material radiation hardness. This sub-detector comprises silicon pixel and strip detectors and covers the region -2.5 to 2.5 in pseudorapidity. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{03-figures/figs_TrackerLayoutWithLAS.png}
+    \caption[Tracker diagram]{A quadrant of the tracker. The strip tracker is shaded in red, and the pixel tracker is shaded in striped yellow and black ~\cite{tracker:2014}.}
+    \label{fig:tracker_quad}
+\end{figure}
+
+\subsection{The Pixel tracker}
+
+The silicon pixel tracker is the closest sub-detector to the IP, as shown in Figure~\ref{fig:tracker_quad}, and is wholly immersed in the 3.8T magnetic field from the solenoid. This highly granular layered cylindrical detector is composed of 66 million silicon pixels and produces a 3D track of every charged particle within its coverage of -2.5 to 2.5
+in pseudorapidity. The silicon pixels are 100 $\times$ 150 \MM$^{2}$ in r$\phi \times z$ and have a
+resolution of 10 \MM \ along the $r$-axis and 20-40 \MM \ along the $z$-axis. The pixel size was explicitly chosen to keep the pixel occupancy below 10$^{-4}$ per pixel per bunch crossing at $r = 10$ cm. Additionally, the tracker takes advantage of the Lorentz effect from the magnetic field by using charge sharing among the pixels. To further exploit this feature, the pixel modules in the endcaps of the tracker overlap and are feathered at an angle of 20 degrees.
+
+\subsection{The Silicon Strip tracker}
+
+The strip tracker is the next layer of the tracker and surrounds the pixel tracker, as shown in Figure~\ref{fig:tracker_quad}. It is divided into three regions: the barrel and two endcaps. The barrel component of the strip tracker consists of two parts: the tracker inner barrel (TIB) and the tracker outer barrel (TOB). The TIB has four layers of silicon strips made with 320 \MM \ thick silicon sensors, with 2724 sensors. The first two layers provide a "stereo" measurement in both $r\times\phi$ and $r\times z$ with a stereo angle of 100 mrad; as such, the resolution in the TIB ranges from 24 - 36 $\times$ 23 \MM \ in $r\phi$ $\times$ $z$. The TOB comprises six layers of sensors with a thickness of 500 \MM \ with a 
+total of 5208 sensors. Again, the first two layers provide a ``stereo" measurement with an angle of 100 mrad, which results in a 
+resolution ranging from 35-53 \MM \ $\times$ 52 \MM \ in $r\phi$ $\times$ $z$. 
+
+The endcaps of the strip tracker have two components: the tracker endcap (TEC) and the tracker inner discs (TID). The silicon sensor modules are oriented perpendicular to the beamline to ensure 
+hermetic coverage out to -2.5 and 2.5 in pseudorapidity. The TEC comprises nine layers of between four and seven rings of modules, while the TID covers the region between the TIB and the TEC and is composed of 3 layers of 3 rings of modules. The TID sensors and the first four layers of the TEC have a thickness of 320 \MM \, and the remaining five layers of the TEC have a thickness of 500 \MM. Layers 1, 2, and 5 of the TEC are "stereo" measurement modules with a stereo angle of 100 mrad.
+
+\subsection{Performance of the Tracker}
+
+The track reconstruction efficiency is measured using muons and was greater than 99\% for Run 2, as shown on the left in Figure~\ref{fig:tracker_variables}.
+
+\begin{figure}[htb!]
+\subfloat{%
+    \begin{minipage}[t]{0.32\textwidth}%
+        \centering
+        \includegraphics[width=\textwidth]{03-figures/tracker_eff_run2.png}
+    \end{minipage}
+    }~\subfloat{%
+    \begin{minipage}[t]{0.32\textwidth}%
+        \centering
+        \includegraphics[width=\textwidth]{03-figures/sim_resolution_pt_eta.png}
+    \end{minipage}
+    }~\subfloat{%
+    \begin{minipage}[t]{0.32\textwidth}%
+        \centering
+        \includegraphics[width=\textwidth]{03-figures/vertex_resolution_z_ntrk.png}
+    \end{minipage}
+    }
+    \centering
+    \caption[Tracker efficiency]{From left to right: the track reconstruction efficiency for muons as a function of $|\eta|$~\cite{tracker:performance:2017}, the $p_T$ resolution vs. $\eta$ of simulated tracks for the 2016 and 2017 CMS detector layouts, and the vertex z resolution vs. the number of tracks of simulated tracks for the 2016 and 2017 CMS detector layouts.}
+    \label{fig:tracker_variables}
+\end{figure}
+
+The momentum resolution of the tracker, shown in the center in Figure~\ref{fig:tracker_variables}, was studied in simulation for the 2016 and 2017 CMS detector and ranged from 1\% in the inner barrel to 5\% in the forward regions. Additionally, the vertex resolution along the $z$-axis of simulated tracks ranges from 100 \MM\ to 10 \MM\ as the number of tracks increases.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Electromagnetic calorimeter}
+
+The CMS ECAL is a highly granular, heterogeneous crystal calorimeter composed of 75,848 1.2kg lead-tungstate (PbWO$_4$) crystals. Its primary function is to measure the energy of electrons and photons produced in proton-proton collisions. Additionally, the triggers use the ECAL's measurements to select events of interest. 
+
+The ECAL has three primary components: the ECAL barrel (EB) covering $\eta$ between -1.479 and 1.479 and the two ECAL endcaps (EE) that cover the regions $1.479 < |\eta| < 3.0$. In front of the endcap, covering the regions $1.653 < |\eta| < 3.0$, are the ECAL pre-showers (ES). The ES detector has two layers of silicon strip sensors between lead plates. Figure~\ref{fig:ecal_layout} shows the layout of the ECAL.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{03-figures/cms_ecal_diagram.png}
+    \caption[Compact Muon Solenoid diagram]{A diagram depicting the layout of the CMS ECAL. The EB, the EE, and ES are depicted. The crystals' layout and orientation are shown in blue.}
+    \label{fig:ecal_layout}
+\end{figure}
+
+The EB has two halves: EB+ and EB-. Each half has 18 super-modules, containing four modules and 1700 crystals. Modules contain 40 to 50 lightweight glass-fiber boxes called sub-modules grouped in sets of 10. The crystals are mounted in a feathered pattern at an angle of 3 degrees with respect to the direction from the interaction point to prevent particles from passing through cracks between crystals. 
+
+The EE is also separated into EE+ and EE-, each containing 2 \textit{dees}. Each \textit{dee} holds 3662 crystals arranged in an x-y geometry. These crystals are grouped in sets of 5$\times$5 to form super-crystals. 
+
+The ES sits in front of the endcaps and helps improve the spatial resolution in the endcap regions. The silicon strips in the ES are 2 mm wide, compared to the front face of the ECAL crystals at 3 cm. Photons and electrons interact in the layers of lead in the ES and initiate an electromagnetic shower, with between 6\% and 8\% of the energy of an EM shower deposited in the ES. When large energy deposits are seen in the ECAL endcaps, the spatial information of the ES is used to determine if it was a single high-energy photon or a pair of lower-energy photons. 
+
+\subsection{Lead Tungstate (PbWO$_4$) Crystals}
+
+The main processes in electromagnetic showers produced by high-energy photons and electrons in the crystals are electron pair production and bremsstrahlung. This cascade process of electrons producing photons through bremsstrahlung, and photons pair producing into pairs of electrons, continues until the energy of the particles becomes too small to support pair production. At this point, the energy loss continues as ionization, Compton scattering, and the photoelectric effect. A scintillator is characterized by three properties: the radiation length $\chi_0$, the Moli\`ere radius $R_M$, and the scintillation decay time $\tau_{sc}$. The radiation length is the distance traveled in the material by an electron before losing 1/e of its initial energy. The Moli\`ere radius is defined as the radius of a cone that contains 90\% of the energy of an EM shower in the material. The scintillation decay time defines the time it takes for the intensity of output scintillation light to drop to 1/e of its maximum. For the CMS ECAL, it is essential to have a compact detector, meaning a small radiation length and Moli\`ere radius. Because of the high event rate, the scintillation decay time needs to be very fast to prevent signals from consecutive events from overlapping.
+
+The scintillation material of the ECAL was chosen to be lead tungstate (PbWO$_4$) due to its radiation hardness, its short
+radiation length ($\chi_0$ = 0.89 cm), its small Moli\`ere radius ($R_M = 2.2$ cm), and its fast scintillation decay time ($\tau_{sc} = 25$ ns), and its relatively low cost. These properties lead to excellent spatial resolution and separation because the electromagnetic showers are well
+contained, and the fast scintillation decay time ensures that showers from different bunches do not overlap in the detector~\cite{ecal:2013}.
+
+\subsection{Photodetectors}
+
+Lead tungstate has a lower light yield than other scintillators commonly used in particle detectors, producing 30 photons/MeV. Such a low light yield requires photodetector signals to have a high quantum efficiency and low noise.
+
+The photodetectors used in the EB, avalanche photodiodes (APDs), are unaffected by the presence of the magnetic field. However, they are more sensitive to radiation damage than the vacuum phototriodes (VPTs) used in the EE, as discussed below.
+
+Attached to the rear face of the crystals in the EB are two 5 mm $\times$ 5 mm APDs. These do not fully cover the rear face of the crystal and collect an average of 4.5 scintillation photons per MeV of energy deposited in the crystal. Their average gain is 50, and their operational voltage is $\sim$400 V. The ADPs will degrade due to the high radiation environment. Initially, the dark current in the APDs was a few nanoamperes. The dark current increases with radiation and will reach values of the order 5 nA at the end of LHC operation.
+
+The expected total radiation dose of the EE is greater than the EB's. For an integrated luminosity of 500 fb$^{-1}$, or roughly ten years of LHC operation, the EB will receive a total dose of 3 kGy. In contrast, the EE will receive an expected 3 kGy, 20 kGy, and 200 kGy at values of $\eta$ = 1.5, 2, and 3, respectively.
+The EE VPTs were chosen for their tolerance to radiation and because using APDs would produce a much higher leakage current under a similar radiation dose~\cite{ecal:tdr:1997}. VPTs are custom photodetectors with a single gain and a copper mesh anode. In the VPTs, the electron drift is parallel to the magnetic field, allowing for high magnetic field operation. Irradiation and magnetic field testing showed a loss of less than 10\% in the mean response at the expected radiation dose attributed to the degradation of the photocathode. 
+
+\subsection{Laser Monitoring}
+
+While its radiation hardness is a primary feature that led to the selection of lead tungstate, it is not entirely unaffected by radiation. As the crystals are exposed to high-intensity radiation, they develop color centers in the crystal lattice that absorb scintillation photons as they propagate through the crystal, reducing the transparency. To monitor and correct for this loss of transparency, a system of lasers injects light into the crystals, and photodiodes measure the lasers' signals. They are fired during the abort gap, a gap in the LHC bunch train, to avoid overlap with beam-related events. The abort gap is an intentional gap in the proton beams of 7 $\mu$s, allowing kicker magnets to fire and dump the beams in case of an emergency. The laser system measures the response of $\sim$600 crystals during each abort gap, and the entire ECAL is measured every 40 minutes.
+
+The measure of the crystals' transparency is the relative response, which is the ratio of the current response of the laser in a crystal to the initial response of the laser in a crystal when the detector was first installed. The relative response of the ECAL in several rings of $|\eta|$ is shown in Figure~\ref{fig:ecal_laser_response}. The response of the crystals changed by $\sim$5\% in a year of data taking during Run 2, while the response of crystals in the EE changed by up to 20\% in a year. The crystals anneal at room temperature between runs, increasing their transparency and, hence, their relative response. The effect of the annealing can be seen in Figure~\ref{fig:ecal_laser_response} as the increase in the relative response of the crystals between data-taking periods. More information on the impacts of ECAL crystal irradiation is provided in Chapter~\ref{chap:stats}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{03-figures/ecal_laser_response.png}
+    \caption[Electromagnetic calorimeter laser monitoring]{The relative response of the ECAL crystals as measured by the ECAL laser monitoring system between 2011 and 2018. }
+    \label{fig:ecal_laser_response}
+\end{figure}
+
+
+\subsection{Calibration and Energy Resolution}
+\label{subsec:ecal_calibration}
+
+The energy resolution of the ECAL was measured using a 3x3 arrangement of EB crystals in test beams, and the takes the form:
+
+\begin{equation}
+    \frac{\sigma(E)}{E} = \frac{2.8\%}{\sqrt{E}} \oplus \frac{12\%}{E} \oplus 0.3\%
+\end{equation}
+
+\noindent where $E$ is the energy of a particle in GeV, and $\sigma$ is the energy resolution. The three terms, in order, are the stochastic term, the noise term, and additional constants. The stochastic term accounts for statistical fluctuations in the EM showers in the crystals, including the formation of the shower and fluctuations in photodetector sampling. The noise term comes from the electronic noise in the pre-amplifier and the APDs. Finally, the constant term, which dominates at high energies, accounts for energy losses into non-scintillating material, energy lost to the EM showers leaking out of the crystals and into other sub-detectors, and errors in the energy response calibration~\cite{ecal:2013}.
+
+Precisely measuring the energy of an electromagnetic shower with the ECAL requires careful calibration, often at the level of individual crystals. The EM showers that develop in the ECAL deposit energy in many crystals, spreading in the $\phi$ direction due to the magnetic field's effect on charged particles. A clustering algorithm groups nearby crystals into structures called ``superclusters" (SC). These SCs are used to measure the energy of an EM object using the following equation:
+
+\begin{equation}
+    E_{e/\gamma} = F_{e/\gamma} E_{SC} =  F_{e/\gamma} ( G \sum_i S_i(t) C_i A_i + E_{ES} ).
+    \label{eqn:ecal_energy}
+\end{equation}
+The elements of this equation are as follows:
+
+\begin{enumerate}
+    \item $F_{e/\gamma}$: Corrections applied to the energy that mainly account for effects from upstream material and effects due to the geometry of the ECAL and imperfect clustering. These corrections are derived using a multivariate regression.
+    \item $G$: ADC-to-GeV conversion factor, which functions on a global scale. This global scale is derived by requiring that the measured mass of the Z boson matches its known value\cite{pdg}.
+    \item $S_i(t)$: Corrections for the loss of scintillation light to color centers formed as the ECAL crystals are irradiated. The relationship between the measured laser response and the scintillation corrections is $\frac{S(t)}{S_0} = \left(\frac{R(t)}{R_0}\right)^{\alpha}$ where $S(t)$ is the scintillation response of the crystal at time $t$, $S_0$ is the initial scintillation response of the crystal, $R(t)$ is the laser response of the crystal at time $t$, $R_0$ is the initial laser response of the crystal, and $\alpha$ is a material dependent quantity.
+    \item $C_i$: this is a calibration correction called the ``intercalibration". It accounts for the differences in scintillation yield between crystals, which can be as large as 15\% for crystals in the EB and as large as 25\% for crystals in the EE. The intercalibrations are determined using the $\phi$-symmetry of the ECAL and the known mass of $\pi^0$ and $\eta$ mesons measured through their decay to two photons.
+    \item $A_i$: The amplitude of the response of each crystal $i$. 
+\end{enumerate}
+
+The calibrations listed above successfully calibrate the energy scale and improve the energy resolution of the EM showers measured by the ECAL. The final energy resolution on unconverted photons with high transverse momentum is approximately 1\%. These are the photons primarily used in H$\rightarrow\gamma\gamma$ analyses.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Hadronic calorimeter}
+
+The hadron calorimeter (HCAL) subdetector measures the energies of hadronic particles, typically coming from jets. It comprises layers of brass, which acts as an absorber, and plastic scintillator tiles read out using wavelength-shifting fibers. Brass was chosen as the absorber material because it is non-magnetic, has a short interaction length, and is relatively easy to machine. This combination of materials maximizes the nuclear interaction length inside the magnet coil to better contain the hadronic showers and minimize non-Gaussian tails in the energy resolution~\cite{hcal:2019}. The scintillator tiles are 3.7 mm thick, are sandwiched between the brass plates, and have full coverage in $\phi$. A diagram of the HCAL and its geometry is shown in Figure~\ref{fig:hcal_layout}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{03-figures/A-schematic-view-of-one-quarter-of-the-CMS-HCAL-during-2016-LHC-operation-showing-the.png}
+    \caption[Hadronic calorimeter diagram]{A diagram of one quadrant of the HCAL, including the HCAL Barrel (HB), the HCAL Endcap (HE), the HCAL Outer detector (HO), and the HCAL Forward detector (HF), which sits in the very forward region~\cite{hcal:2019}.}
+    \label{fig:hcal_layout}
+\end{figure}
+
+The HCAL barrel (HB) contains 15 layers of 5cm thick brass plates between 3.7 mm scintillator tiles and covers the pseudorapidity range $|\eta| < 1.4$. The layer of HB closest to the ECAL is a 9mm thick scintillator. The HCAL endcap (HE) covers the regions in pseudorapidity between $1.3 < |\eta| < 3.0$. The part of the HCAL that sits outside the solenoid (HO) covers the region $|\eta| < 1.26$ and is responsible for improving the energy resolution in the tails of hadronic showers and for improving the energy resolution of the missing transverse energy. The HCAL detector's final component lies in the detector's forward region (HF). It covers the highest ranges of pseudorapidity between $3.0 < |\eta| < 5.0$ and is made of steel and quartz fiber. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Muon detection systems}
+
+The muon detector is the last subdetector and the furthest from the interaction point. This subdetector makes precise measurements of muons' position, momentum, and charge. The muon detection system is composed of a barrel and endcap in much the same fashion as the other detectors and is embedded in the iron return yolk of the magnet. The layout of the muon system is shown in Figure~\ref{fig:cms_muon_system}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{03-figures/CMS_muon_system.png}
+    \caption[Muon system diagram]{A longitudinal slice showing a quarter of the CMS detector. In color are highlighted the components of the muon system, including the four drift tube stations, the four cathode strip chambers in the endcap, and the resistive plate chambers.}
+    \label{fig:cms_muon_system}
+\end{figure}
+
+\subsection{Drift tube chambers}
+
+The drift tube chambers (DT) measure the position of muons in the barrel portion of the detector. Each tube is 4cm wide and contains a stretched wire suspended in a gas of
+85\% argon and 15\% CO$_2$. The DT
+chambers comprise cells bounded by aluminum plates and I-shaped aluminum beams, which serve as cathodes. In the center of the cell is a stretched stainless steel wire, which functions as an anode. The efficiency of DT chamber cells is $\sim$99.8\%, and
+each cell has a spatial resolution of $\sim$180\MM.
+Free electrons produced by ionizing particles drift to the anode wire, where gas amplification occurs. The time between the particle crossing the tube and the signal on the wire is used to measure the location of the ionizing particle's interaction with the DT.
+
+\subsection{Cathode strip chambers}
+
+The CMS muon detector has 468 cathode strip chambers (CSCs), which are trapezoidal in shape and cover either 10$\degree$ or 20$\degree$, that detect the location of muons. The CSCs contain six anode wire plans set between seven cathode panels. The wires run azimuthally in the detector and are used to define a muon track's radial coordinate. The muon coordinate in $\phi$ is measured by interpolating the charge induced on the strips.
+
+\subsection{Resistive plate chambers}
+
+The muon detection system also contains gaseous parallel-plate detectors known as resistive plate chambers (RPCs) that tag the time of an ionizing event. The RPCs measure the $t_0$ used in the DT measurements of the location of the ionizing particle. Six layers of RPCs are embedded in the barrel iron return yoke, with some redundancy in coverage to ensure the trigger algorithm always has four layers of RPC information to use in reconstruction. This guarantees the reconstruction of low-energy ionizing particles, which may stop inside the return yolk. 
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Data acquisition}
+\label{sec:daq}
+
+In the LHC, proton-proton collisions occur every 25 ns, corresponding to an event rate of 40 MHz. Many of these events contain interactions that are of little interest to CMS. A trigger system reduces the event rate and focuses on interesting physics. This system takes place in two steps or levels. The Level 1 (L1) trigger is entirely hardware based since it must be extremely fast, the second trigger are software based and is collectively referred to as the High Level Trigger (HLT), where $\sim$12,000 processors are used to select events for storage.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{03-figures/Architecture-of-the-CMS-Level-1-Trigger-85.png}
+    \caption[Level 1 trigger architecture]{The architecture of the CMS Level 1 trigger system.}
+    \label{fig:l1_trigger}
+\end{figure}
+
+\subsection{Level 1 trigger}
+
+The L1 trigger uses many FPGAs to reduce the event rate from 40 MHz to 100 kHz during the L1 decision time. Each event and all its information is stored in an on-detector buffer. To prevent mixing particle information from different events, the detectors must have a precise time alignment, and the signals from the millions of readout channels in the detector must be synchronized. The latency tolerance is about 4 $\mu$s. If the event passes the L1 trigger, it is processed by the HLT. To keep up with the event rate, the L1 trigger only uses information from a few subdetectors: the calorimeters, and the muon chambers. The architecture of the L1 trigger is shown in Figure~\ref{fig:l1_trigger}. 
+
+\subsection{High level trigger}
+
+When the L1 trigger selects an event, data is read from the detector and sent to the HLT for processing. The HLT program runs on a farm of commercial processors, with one event per processor, and reduces the event rate from 100 kHz to 1 kHz. To pass the HLT an event must satisfy one or more predefined event selection criteria. The criteria are known as paths and are organized by computational speed, with the least expensive paths checked first. An event may pass multiple paths, but it is stored as soon as it passes a single path to improve processing speed. After passing the HLT, an event is saved to disk for later processing by offline software, which produces high-level objects used in physics analyses, such as electrons, photons, and jets.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
